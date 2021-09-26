@@ -1,0 +1,94 @@
+.msg-pv
+{
+  
+
+  
+  
+}
+
+.msg-pv .msg-pv-data
+{ 
+  
+  display: flex;
+  justify-content: flex-end;
+  
+}
+
+
+.msg-pv .msg-pv-data .msg-pv-text
+{ 
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  position: absolute;
+  top: -31px;
+  /*left:100px;*/
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  margin-right: 50px;
+  z-index: 5;
+  /*box-shadow: rgba(0, 0, 0, 0.15) 0.95px -2.05px 2.6px;*/
+}
+
+.msg-pv .msg-pv-data .msg-pv-text span
+{
+  border-radius: 17px 17px 0 0;
+  background-color: #fff;
+  padding: 7px;
+  word-wrap: break-word;
+  text-align: center;
+  color:black;
+  overflow-wrap: break-word;
+  text-align: justify;
+  font-size: 13px;
+  line-height: 18px;
+  white-space: normal;
+  justify-content: center;
+  box-sizing: border-box;
+  max-width: 300px;
+  box-shadow:rgba(0, 0, 0,  0.10) 0px 4px 6px -1px;
+  box-shadow:rgba(0, 0, 0, 0.3) 0px -3px 4px -1px;
+  
+}
+
+.msg-pv .msg-pv-data .msg-pv-text .filler
+{
+  height: 40px;
+  background-color: #fff;
+  max-width: 250px;
+}
+
+
+
+.msg-pv .msg-pv-data .msg-pv-picture
+{ 
+  position: relative;
+  top: -94px;
+  border-radius: 7px;
+  display: flex;
+  justify-content: baseline;
+  height: 100px;
+  z-index: 5;
+  margin-right: 50px;
+  background-color: #fff;
+  box-sizing: content-box;
+  
+  /*position: relative;
+  top: -57px;
+  left:100px;
+  box-shadow:rgba(0, 0, 0,  0.10) 0px 4px 6px -1px;
+  box-shadow:rgba(0, 0, 0, 0.3) 0px -3px 4px -1px;*/
+}
+
+.msg-pv .msg-pv-data .msg-pv-picture img
+{
+  border-radius: 7px;
+  
+  object-fit: contain;
+  max-width: 100px;
+  max-height: 100px;
+  
+  
+  box-shadow:rgba(0, 0, 0,  0.10) 0px 4px 6px -1px;
+  box-shadow:rgba(0, 0, 0, 0.3) 0px -3px 4px -1px;
+}

@@ -1,0 +1,110 @@
+.chat-room
+{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  
+  max-width: 400px;
+  width:100%;
+}
+
+.chat-room .user-data
+{ position: relative;
+  top:auto;
+  font-family: helvetica;
+  font-size: 2.5rem;
+  box-sizing:content-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  background-color: #333333;
+  color: white;
+  border-radius: 7px 7px 0 0;
+}
+
+.chat-room .user-data img
+{
+  border-radius: 50px;
+  margin: 10px 5px;
+}
+
+.chat-room .user-data .ImprovisedProfilePic .k
+{
+  margin: 10px 5px;
+}
+
+.chat-room .user-data span
+{
+  width: 100%;
+  margin: 0 5px;
+}
+
+.chat-room .send-message
+{
+  
+}
+
+.chat-room .send-message .messages
+{ 
+  display: flex;
+  flex: 0 7 auto;
+  flex-direction: column-reverse;
+  position:relative;
+  top: auto;
+  height:75vh;
+  width: 100%;
+  overflow-y: auto;
+  background-color: white;
+  scroll-behavior: smooth;
+}
+
+.chat-room .send-message .messages .msg-box
+{
+  padding: 10px;
+}
+
+.chat-room .send-message .messages .msg-box .void
+{
+  height: 30vh;
+}
+
+.chat-room .send-message .messages .msg-box .options
+{
+  color:gray;
+  padding: 2px;
+}
+
+.chat-room .send-message .messages .msg-box .options .popup-hidden
+{
+  visibility: hidden;
+  position: absolute;
+}
+
+.chat-room .send-message .messages .msg-box .options .popup-show
+{ 
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  z-index: 2;
+  background-color: #fff;
+  color: black;
+  border: solid 1px #ddd;
+  box-shadow: 0 0 0.5em rgb(187, 187, 187);
+
+}
+
+.chat-room .send-message .messages .msg-box .options .popup-show .options-item
+{
+  border-bottom: solid 1px #ddd;
+  padding: 5px;
+  width: 100%;
+}
+
+.chat-room .send-message .messages .msg-box .options .popup-show .options-item:hover
+{
+  background-color: #ddd;
+}
+
+

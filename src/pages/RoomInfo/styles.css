@@ -1,0 +1,103 @@
+.room-info
+{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+.room-info .room-seila
+{
+  color: black;
+  text-decoration: none;
+  padding: 6px 8px;
+  display:flex;
+  flex-direction: row;
+  justify-content:space-between;
+  overflow-y: auto;
+  width: 100%;
+}
+
+.room-info img
+{
+  border-radius: 50px;
+}
+
+.room-info .room-seila .room-data
+{ 
+  width: 100%;
+  display: flex;
+  align-items: right;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.room-info .room-seila .room-data .user-name
+{
+  padding: 2px 15px;
+  font-size: 11.5px;
+}
+
+.room-info .room-seila .room-data .last-message
+{
+  font-size: 10.5px;
+  color: #8e8e8e;
+  padding: 1px 15px;
+}
+
+.room-info .sidebar-options
+{
+  
+  position: relative;
+  height:5px;
+  width:5px;
+}
+
+.room-info .sidebar-options .settlement
+{ 
+  position: absolute;
+  top: -116%;
+  left: -425%;
+  
+  
+}
+
+.room-info .sidebar-options .settlement .options
+{
+  width: 5px;
+  height: 5px;
+  font-size: 15px;
+  color: #333333;
+  
+}
+
+.room-info .sidebar-options .settlement .options .popup-icon svg:hover
+{
+  background-color: #ddd;
+  border-radius: 3px;
+}
+
+.room-info .sidebar-options .settlement .options .popup-show
+{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  visibility: show;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  z-index: 1000;
+  background-color: #fff;
+  color: black;
+  border: solid 1px #ddd;
+  box-shadow: 0 0 0.5em rgb(187, 187, 187);
+  font-size: 15px;
+  top: -570%;
+  left: 824%;
+}
+
+.room-info .sidebar-options .settlement .options .popup-show .options-item
+{
+  border-bottom: solid 1px #ddd;
+  padding: 5px;
+  width: 100%;
+}
+
+

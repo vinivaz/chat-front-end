@@ -1,0 +1,180 @@
+.window
+{
+  
+  position: absolute; /* Stay in place */
+  z-index: 7; /* Sit on top */
+   /* Location of the box */
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow : auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
+  
+}
+
+.window-content
+{ 
+  display: flex;
+  justify-content: center;
+}
+
+.window .window-content .view-image .close-set .close:hover,
+.window .window-content .view-image .close-set .close:focus{
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.window .window-content .message-window
+{ position: absolute;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 200px;
+  width: 50%;
+
+  /*
+    left:40%;
+  */
+  top:40%;
+  
+  
+ 
+  flex-direction: column;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 2.5rem;
+  border-radius: 7px;
+}
+
+.window .window-content .message-window .window-options
+{ display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  width: 100%;
+}
+
+.window .window-content .message-window .window-options:hover
+{
+  background-color: #ddd;
+}
+
+.window .window-content .message-window .window-options:first-of-type
+{
+  border-radius: 7px 7px 0 0;
+}
+
+.window .window-content .message-window .window-options:last-of-type
+{
+  border-radius: 0 0 7px 7px;
+}
+
+.window .window-content .message-window .buttons
+{ 
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.window .window-content .message-window .buttons button
+{
+  margin: 10px;
+}
+
+.window .window-content .view-image .close-set 
+{ z-index: 7;
+  position: absolute;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 7px;
+  top: 2%;
+  left: 90%;
+  box-shadow: 0 0 0.5em black;
+}
+
+.window .window-content .view-image .close-set .close
+{
+  color: #aaaaaa;
+  z-index: 7;
+  font-size: 28px;
+  font-weight: bold;
+  
+}
+
+.view-image
+{ 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  background-color: white;
+  
+}
+
+.view-image img
+{  
+  display: flex;
+
+  position: absolute;
+  top: 13%;
+  max-height: 85%;
+  max-width: 90vw;
+  margin-bottom: 300px;
+  
+}
+
+/*.window
+{
+  -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    align-items: center;
+    background-color: rgba(0,0,0,.7);
+    bottom: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    top: 0;
+  
+}
+
+.close
+{
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.window-content
+{ -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  background-color: #282828;
+  border-radius: 8px;
+  -webkit-box-shadow: 0 4px 4px rgb(0 0 0 / 30%);
+  box-shadow: 0 4px 4px rgb(0 0 0 / 30%);
+  color: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-height: 384px;
+  width: 524px;
+
+}*/

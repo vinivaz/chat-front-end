@@ -1,0 +1,168 @@
+
+
+.chat-room .send-message .send-msg .close-answer
+{
+  position: relative;
+}
+
+.chat-room .send-message .send-msg .close-answer .close
+{
+  position: absolute;
+  top: -56px;
+  left: 4%;
+  background-color: #fff;
+  box-shadow:rgba(0, 0, 0,  0.10) 0px 4px 6px -1px;
+  box-shadow:rgba(0, 0, 0, 0.3) 0px -3px 4px -1px;
+  padding: 3px 7px;
+  border-radius: 10px;
+}
+
+.chat-room .send-message .send-msg .msg-pv
+{
+  position: relative;
+  top: -9px;
+  border: solid 1px #ddd;
+  background-color: #fff;
+  border-radius: 10px 10px 0 0 ;
+  height: 20px;
+  /*box-shadow: rgba(0, 0, 0, 0.15) 0.95px -2.05px 2.6px;*/
+  box-shadow:rgba(0, 0, 0,  0.10) 0px 4px 6px -1px;
+  box-shadow:rgba(0, 0, 0, 0.3) 0px -3px 4px -1px;
+
+  
+  
+}
+
+.chat-room .send-message .send-msg .msg-pv .msg-pv-data
+{ 
+  
+  display: flex;
+  justify-content: flex-end;
+  
+}
+
+.chat-room .send-message .send-msg .msg-pv .msg-pv-data .close
+{
+  position: absolute;
+  top: -249%;
+  left: 6%;
+  background-color: #fff;
+  box-shadow:rgba(0, 0, 0,  0.10) 0px 4px 6px -1px;
+  box-shadow:rgba(0, 0, 0, 0.3) 0px -3px 4px -1px;
+  padding: 3px 7px;
+  border-radius: 10px;
+}
+
+.chat-room .send-message .send-msg .msg-pv .msg-pv-data .msg-pv-text
+{ 
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  position: absolute;
+  top: -31px;
+  /*left:100px;*/
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  margin-right: 50px;
+  z-index: 5;
+  /*box-shadow: rgba(0, 0, 0, 0.15) 0.95px -2.05px 2.6px;*/
+}
+
+.chat-room .send-message .send-msg .msg-pv .msg-pv-data .msg-pv-text span
+{
+  border-radius: 17px 17px 0 0;
+  background-color: #fff;
+  padding: 7px;
+  word-wrap: break-word;
+  text-align: center;
+  color:black;
+  overflow-wrap: break-word;
+  text-align: justify;
+  font-size: 13px;
+  line-height: 18px;
+  white-space: normal;
+  justify-content: center;
+  box-sizing: border-box;
+  max-width: 300px;
+  box-shadow:rgba(0, 0, 0,  0.10) 0px 4px 6px -1px;
+  box-shadow:rgba(0, 0, 0, 0.3) 0px -3px 4px -1px;
+  
+}
+
+.chat-room .send-message .send-msg .msg-pv .msg-pv-data .msg-pv-text .filler
+{
+  height: 40px;
+  background-color: #fff;
+  max-width: 250px;
+}
+
+
+
+.chat-room .send-message .send-msg .msg-pv .msg-pv-data .msg-pv-picture
+{ 
+  position: relative;
+  top: -94px;
+  border-radius: 7px;
+  display: flex;
+  justify-content: baseline;
+  height: 100px;
+  z-index: 5;
+  margin-right: 50px;
+  background-color: #fff;
+  box-sizing: content-box;
+  
+  /*position: relative;
+  top: -57px;
+  left:100px;
+  box-shadow:rgba(0, 0, 0,  0.10) 0px 4px 6px -1px;
+  box-shadow:rgba(0, 0, 0, 0.3) 0px -3px 4px -1px;*/
+}
+
+.chat-room .send-message .send-msg .msg-pv .msg-pv-data .msg-pv-picture img
+{
+  border-radius: 7px;
+  
+  object-fit: contain;
+  max-width: 100px;
+  max-height: 100px;
+  
+  
+  box-shadow:rgba(0, 0, 0,  0.10) 0px 4px 6px -1px;
+  box-shadow:rgba(0, 0, 0, 0.3) 0px -3px 4px -1px;
+}
+
+
+.chat-room .send-message .send-msg .interaction
+{
+  display: flex;
+  position: relative;
+  top:auto;
+  flex-direction: row;
+  justify-content: center;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 0 0 7px 7px;
+  border: solid 1px #ddd;
+  z-index: 6;
+}
+
+.chat-room .send-message .send-msg .interaction input
+{
+  width: 100%;
+  border: solid 1px #ddd;
+  height: 40px;
+  border-radius: 50px;
+  padding: 0 10px;
+}
+
+.chat-room .send-message .send-msg .interaction input:focus{
+  outline: none;
+}
+
+.chat-room .send-message .send-msg .interaction button
+{
+  color: white;
+  border: none;
+  background-color: #333333;
+  padding: 10px;
+}
