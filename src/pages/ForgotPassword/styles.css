@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css?family=Grand+Hotel&display=swap');
+
+.Logo {
+    font-family: 'Grand Hotel', cursive;
+    font-size: 50px;
+    padding-bottom: 40px;
+}
+
+.forgot-password{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 85vh;
+  
+}
+
+.forgot-password .info
+{
+	position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 10px;
+}
+
+.forgot-password .info .info-content
+{
+	border: solid 1px #ddd;
+  border-radius: 20px;
+  position: absolute;
+  top: 55px;
+  background-color: white;
+  padding: 20px;
+  z-index: 1000;
+  font-size: 2rem;
+}
+
+.forgot-password .form{
+  width: 350px;
+  background: #fff;
+  padding:  30px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+}
+
+.forgot-password .form .title
+{
+	font-size: 3rem;
+}
+
+.forgot-password .form p
+{
+	font-size: 2.5rem;
+	padding: 10px;
+}
+
+.forgot-password .form .input {
+    border-radius:10px;
+    height: 37px;
+    margin-bottom: 8px;
+    padding: 0 10px;
+    color: #777;
+    font-size: 15px;
+    width: 100%;
+    border: 1px solid #ddd;
+    background: #FAFAFA;
+}
+/* crtl ; */
+.forgot-password .form span
+{
+	font-size: 2.5rem;
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+::-webkit-input-placeholder  { font-size: 12px; }
+input:-moz-placeholder { font-size: 12px; }
+.alerti {
+   color: red;
+   font-size: 14px;
+   margin-bottom: 15px;
+   border: 0;
+   padding: 10px;
+   border-radius: 5px; 
+   width: 100%;
+   text-align: center;
+   ;
+}
+
+.form-btn {
+    color: #fff;
+    font-size: 16px;
+    background:#1D95F2;
+    height: 30px;
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    margin-top: 10px;
+    
+}
+hr {
+    margin: 20px 0;
+    border: none;
+    border-bottom: 1px solid #cdcdcd;
+    width: 100%;
+}
+
+.forgot-password .form-navigation
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.forgot-password .form-navigation .link-btn {
+    font-size: 14px;
+    color: #555;
+    text-decoration: none; 
+    margin-bottom: 5px;
+}
+
+.forgot {
+    color: black;
+    text-decoration: none;
+    font-size: 12px;
+    margin: 15px 0;
+}
+

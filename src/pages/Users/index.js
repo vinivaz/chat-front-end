@@ -1,43 +1,123 @@
+import { CollectionsOutlined } from '@material-ui/icons';
+
 import React, { useState, useEffect, useRef } from 'react';
+
+import ReactDOM from 'react-dom';
+
 import {IoEllipsisVerticalSharp, IoEllipsisVertical } from "react-icons/io5";
-import { useDispatch } from 'react-redux';
+
+import { useDispatch, useSelector } from 'react-redux';
 
 import { api } from '../../services/api'
+
 import ImprovisedProfilePic from "../ImprovisedProfilePic"
+
 import './styles.css';
 
 export default function Users(){
+
   const [users, setUsers] = useState([]);
-  const [ canScroll, setCanScroll ] = useState(false)
+  
   const [ page, setPage ] = useState(1);
+
   const [pages, setPages ] = useState(1);
-  const [ test, setTest ] = useState({
-    scrollTop: '',
-    clientHeight: '',
-    scrollHeight: '',
-    scrollH_scrollT: '',
-    porcentagem: ''
+  
+  const [ canScroll, setCanScroll ] = useState(false);
+
+  const onlineUsers = useSelector(state => state.online_users);
+
+  const [ isOnline, setIsOnline ] = useState(false);
+
+  const [ dimentions, setDimentions ] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight
   });
 
   const ref = useRef(null);
+  const ref2 = useRef(null);
 
   const dispatch = useDispatch();
 
+  const showUsers = useSelector(state => state.navigation.show_users);
+
   useEffect(()=>{
-    getUsers()
+    if(showUsers === true){
+      noScrollbarHandler()
+    }
+  }, [showUsers])
+
+  const handleHideDropdown = (event) => {
+    if (event.key === "Escape") {
+      document.removeEventListener("keydown", handleHideDropdown, true);
+      document.removeEventListener("click", handleClickOutside, true);
+      dispatch({type: 'TOGGLE_USERS'})
+    }
+  };
+
+  const handleClickOutside = event => {
     
-  },[]);
-/*
+    if (ref.current && !ref.current.contains(event.target)) {
+      
+      document.removeEventListener("keydown", handleHideDropdown, true);
+      document.removeEventListener("click", handleClickOutside, true);
+      dispatch({type: 'TOGGLE_USERS'})
+    }
+  };
+
   useEffect(() =>{
-    console.log(test)
+    if(showUsers === true){
+      document.addEventListener("keydown", handleHideDropdown, true);
+      document.addEventListener("click", handleClickOutside, true);
+    }else{
+      
+      document.removeEventListener("keydown", handleHideDropdown, true);
+      document.removeEventListener("click", handleClickOutside, true);
+    }
+  
     
-  }, [test]);*/
+  }, [showUsers])
+
+  useEffect(() =>{
+    window.addEventListener('resize', () =>{
+      setDimentions({
+        width: window.innerWidth,
+        height: window.innerHeight
+      })
+    });
+    
+    return () => {
+       window.removeEventListener('resize', () =>{
+         setDimentions({
+        width: window.innerWidth,
+        height: window.innerHeight
+      })
+       });
+    }
+  },[]);
+
+
+  useEffect(()=> {
+
+    if((dimentions.width <=760) && showUsers===false){
+
+    }else{
+      if(users.length === 0){
+        getUsers()
+        noScrollbarHandler()
+      }
+    }
+
+  },[dimentions, showUsers])
 
   function getUsers(){
+    
+    setPages(1)
+    setUsers([])
     api.get('/user/list?page=1')
     .then((response) => {
       setUsers(response.data.docs)
       setPages(response.data.pages)
+      noScrollbarHandler()
     })
     .catch(function (error){
       console.log(error);
@@ -45,20 +125,15 @@ export default function Users(){
   };
 
   function getMoreUsers(e){
-    console.log("getMoreUser esta sendo executado")
 
     const { scrollTop, clientHeight, scrollHeight } = e.currentTarget;
 
     const scrollBarPercenage = ((scrollTop/(scrollHeight - clientHeight))*100)
-  
-    console.log("pages: ", pages)
-    console.log("page: ", page)
     
     if(canScroll === true){
       if(scrollBarPercenage >= 97){
 
         if(pages > page){
-          console.log("atualixar")
           api.get(`/user/list?page=${page + 1}`)
           .then((response) => {
             setUsers([...users, ...response.data.docs]);
@@ -78,25 +153,42 @@ export default function Users(){
     }
   };
 
-  function openWindow(id){
-    dispatch({type: "SET_WINDOW", data: {open:true,  user_id: id, app_options: false}})
-    console.log(id)
-    /*Object.keys(tools).map(key => {
-      if(key === item){
-        tools[key](id)
-        console.log(key)
+  function openWindow(userData){
+    dispatch({
+      type: "SET_WINDOW",
+      data: {
+        open:true,
+        user_data: userData,
+        app_options: false
       }
-    })*/
+    })
+  }
+
+  function isUserOnline(userId){
+    if(userId && onlineUsers){
+      if(onlineUsers.includes(userId)){
+        return true
+      }else{
+        return false
+      }
+    }
   }
   
   function noScrollbarHandler(){
+    const isComponentShowing = window.getComputedStyle(ReactDOM.findDOMNode(ref2.current)).getPropertyValue("display");
+    
+    if(isComponentShowing=== 'none')return;
     if(users !== undefined){
       var varPage = page
       var varUsers = users
       const interv1 = setInterval(
         () => {
-          console.log("tem um setInterval sendo execultado")
-          const { clientHeight, scrollHeight } = ref.current
+          console.log("setInterval is running")
+          if(ref.current === null) {
+            clearInterval(interv1)
+            return
+          } 
+          const { clientHeight, scrollHeight } = ref.current 
 
           var scrollbarNotShowing = ((clientHeight - scrollHeight) === 1)|| clientHeight === scrollHeight || ((clientHeight - scrollHeight) === 0)
         
@@ -126,23 +218,43 @@ export default function Users(){
   }
 
   return(
-    <div className="users">
-      <div className="info-element">users</div>
+    <div
+      className={`users ${showUsers === true? 'showing': 'not-showing'}`}
+      ref={ref2}
+      id="m"
+    >
+      <div 
+        className="info-element"
+        onClick={() => dispatch({type: 'TOGGLE_USERS'})}
+      >
+        Users
+      </div>
       <div
-      className="all-users"
-      onScroll={(e) => getMoreUsers(e)}
-      onLoad={() => noScrollbarHandler()}
-      ref={ref}
+        className="all-users"
+        onScroll={(e) => getMoreUsers(e)}
+        onLoad={() => noScrollbarHandler()}
+        ref={ref}
       >
         {users.map(user => 
-          <div className="users-item" key={user._id} onClick={() => openWindow(user._id)}>
+          <div className="users-item" key={user._id} onClick={() => openWindow(user)}>
             <div className="user-content">
-
-              {user.profile_img !== "" ?
-                <img src={"http://" + user.profile_img} width="45" height="45" alt={"profile picture of " + user.name}/>
-              : 
-                <ImprovisedProfilePic circle={true} user={user} width={45} height={45}/>
-              }
+              <div className="user-icon">
+                {user.profile_img !== "" ?
+                  <img
+                    src={"http://" + user.profile_img}
+                    width="45"
+                    height="45"
+                    alt={"profile picture of " + user.name}
+                  />
+                : 
+                  <ImprovisedProfilePic circle={true} user={user} width={45} height={45}/>
+                }
+                {isUserOnline(user._id) === true ?
+                  <div className="online-sign"></div>
+                  :
+                  ''
+                }
+              </div>
               <div>{user.name}</div>
             </div>
           </div>
@@ -152,85 +264,3 @@ export default function Users(){
   )
 }
 
-/*
-<div className="users-item">
-          <div className="user-content">
-            <img width="45" height="45" src="http://localhost:3000/files/profile/aed52abcf1eb89c08a8927b4d44cfc3b-teste.jpeg" alt="profile picture of someone"/>
-            <div>nome custom</div>
-            
-          </div>
-          
-        </div>
-        <div className="users-item">
-          <div className="user-content">
-            <img width="45" height="45" src="http://localhost:3000/files/profile/aed52abcf1eb89c08a8927b4d44cfc3b-teste.jpeg" alt="profile picture of someone"/>
-            <div>nome custom</div>
-            
-          </div>
-          
-        </div>
-        <div className="users-item">
-          <div className="user-content">
-            <img width="45" height="45" src="http://localhost:3000/files/profile/aed52abcf1eb89c08a8927b4d44cfc3b-teste.jpeg" alt="profile picture of someone"/>
-            <div>nome custom</div>
-            
-          </div>
-         
-        </div>
-        <div className="users-item">
-          <div className="user-content">
-            <img width="45" height="45" src="http://localhost:3000/files/profile/aed52abcf1eb89c08a8927b4d44cfc3b-teste.jpeg" alt="profile picture of someone"/>
-            <div>nome custom</div>
-            
-          </div>
-          
-        </div>
-        <div className="users-item">
-          <div className="user-content">
-            <img width="45" height="45" src="http://localhost:3000/files/profile/aed52abcf1eb89c08a8927b4d44cfc3b-teste.jpeg" alt="profile picture of someone"/>
-            <div>nome custom</div>
-            
-          </div>
-         
-        </div>
-        <div className="users-item">
-          <div className="user-content">
-            <img width="45" height="45" src="http://localhost:3000/files/profile/aed52abcf1eb89c08a8927b4d44cfc3b-teste.jpeg" alt="profile picture of someone"/>
-            <div>nome custom</div>
-            
-          </div>
-          
-        </div>
-        <div className="users-item">
-          <div className="user-content">
-            <img width="45" height="45" src="http://localhost:3000/files/profile/aed52abcf1eb89c08a8927b4d44cfc3b-teste.jpeg" alt="profile picture of someone"/>
-            <div>nome custom</div>
-            
-          </div>
-          
-        </div>
-        <div className="users-item">
-          <div className="user-content">
-            <img width="45" height="45" src="http://localhost:3000/files/profile/aed52abcf1eb89c08a8927b4d44cfc3b-teste.jpeg" alt="profile picture of someone"/>
-            <div>nome custom</div>
-            
-          </div>
-          
-        </div>
-        <div className="users-item">
-          <div className="user-content">
-            <img width="45" height="45" src="http://localhost:3000/files/profile/aed52abcf1eb89c08a8927b4d44cfc3b-teste.jpeg" alt="profile picture of someone"/>
-            <div>nome custom</div>
-            
-          </div>
-          
-        </div>
-        <div className="users-item">
-          <div className="user-content">
-            <img width="45" height="45" src="http://localhost:3000/files/profile/aed52abcf1eb89c08a8927b4d44cfc3b-teste.jpeg" alt="profile picture of someone"/>
-            <div>nome custom</div>
-            
-          </div>
-          
-        </div>
-*/

@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import AppOptions from '../AppOptions';
 
+import DeleteAccountDialog from '../DeleteAccountDialog';
+
 import MessageOptions from '../MessageOptions';
 
 import RoomOptions from '../RoomOptions';
@@ -22,9 +24,11 @@ export default function Window(){
 
   const [ url, setUrl ] = useState()
 
-  const [ roomId, setRoomId ] = useState()
+  const [ roomData, setRoomData ] = useState()
 
-  const [ userId, setUserId ] = useState()
+  const [ userData, setUserData ] = useState()
+
+  const [ deleteAccount, setDeleteAccount ] = useState()
 
   const [ appOptions, setAppOptions ] = useState()
 
@@ -47,7 +51,7 @@ export default function Window(){
   };
 
   const handleClickOutside = event => {
-    console.log("abubleh")
+    
     if (ref.current && !ref.current.contains(event.target)) {
       document.removeEventListener("keydown", handleHideDropdown, true);
       document.removeEventListener("click", handleClickOutside, true);
@@ -73,12 +77,13 @@ export default function Window(){
     setUrl(window.url)
     setMessageOptions({
       messageAction: window.message_action,
-      messageId: window.message_id
+      messageData: window.message_data
     })
-    setRoomId(window.room_id)
-    setUserId(window.user_id)
+    setRoomData(window.room_data)
+    setUserData(window.user_data)
     setProfileData(window.profile_data)
     setAppOptions(window.app_options)
+    setDeleteAccount(window.delete_account)
   }
 
   useEffect(() =>{
@@ -101,14 +106,15 @@ export default function Window(){
       <div className="window-content" ref={ref}>
         {messageOptions&&
           <MessageOptions
-            messageId={messageOptions.messageId}
+            //messageId={messageOptions.messageId}
+            messageData={messageOptions.messageData}
             messageAction={messageOptions.messageAction}
             show={true}
           />
         }
-        {roomId&&
+        {roomData&&
           <RoomOptions
-            roomId={roomId}
+            roomData={roomData}
             show={isOpen? true : false}
           />
         }
@@ -117,9 +123,9 @@ export default function Window(){
             url={url}
           />
         }
-        {userId&&
+        {userData&&
           <UserOptions
-            userId={userId}
+            userData={userData}
             show={true}
           />
         }
@@ -132,6 +138,12 @@ export default function Window(){
         {appOptions&&
           <AppOptions
             appOptions={true}
+            show={isOpen? true : false}
+          />
+        }
+        {deleteAccount&&
+          <DeleteAccountDialog
+            deleteAccount={true}
             show={isOpen? true : false}
           />
         }

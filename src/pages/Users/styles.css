@@ -3,12 +3,27 @@
   font-family: helvetica;
   max-width:200px;
   width: 100%;
-  height: 93vh;
-  border-radius: 7px;
+  height: 100vh;
+  
   background-color: #ffffff;
   display: flex;
   justify-content: center;
   flex-direction: column;
+  transition: .3s ease;
+}
+
+.users .info-element
+{ 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 78.5px;
+  margin: 0;
+  color: black;
+  font-size: 2.5rem;
+  box-shadow: rgb(0 0 0 / 5%) 0px 1px 4px 0px;
+  background-color: #fff;
+  z-index: 1;
 }
 
 .users .users-item
@@ -25,6 +40,7 @@
   height:100vh;
   overflow-y: auto;
   overflow-x: hidden;
+
 }
 
 .users .all-users .users-item
@@ -33,6 +49,7 @@
   flex-direction: row;
   justify-content: space-between;
   padding: 7px;
+  background-color: #f8f7f7;
 }
 
 .users .all-users .users-item:hover
@@ -41,34 +58,84 @@
 }
 
 .users .all-users .users-item .user-content
-{
+{ font-size: 2.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.users img
+.users .all-users .users-item .user-content .user-icon
+{
+  position: relative;
+}
+
+.users .all-users .users-item .user-content .user-icon img
 {
   border-radius: 50px;
   margin-right: 7px;
 }
 
-.users .ImprovisedProfilePic
+.users .all-users .users-item .user-content .user-icon .improvised-profile-pic
 {
   margin-right: 7px;
 }
 
-.users .info-element
-{ 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 83px;
-  margin: 0;
-  color: #e2e2e2;
-  font-size: 2.5rem;
-  border-radius: 7px 7px 0 0;
-  background-color: #333333;
+.users .all-users .users-item .user-content .user-icon .online-sign
+{
+  position: absolute;
+  left: 71%;
+  top: 69%;
+  height: 12px;
+  width: 12px;
+  background-color: lawngreen;
+  border-radius: 50%;
+  border: 2px solid #f8f7f7;
 }
+
+@media (max-width: 890px){
+  .users
+  {
+    max-width:140px;
+    
+  }
+}
+
+@media (max-width: 760px){
+  .users
+  { 
+    border-radius: 7px;
+    /* display: none; */
+    
+    transition: .3s ease;
+  }
+  .users .info-element
+  {
+    border-radius: 7px 7px 0 0;
+  }
+  
+  .not-showing{
+    position: absolute;
+    
+    width: 0;
+    display: none;
+  }
+  .showing
+  { position: absolute;
+    display: flex;
+    top: 10%;
+    max-width: 230px;
+
+    height: 70vh;
+    
+    width: 100%;
+    z-index: 5;
+    
+    
+    box-shadow:rgba(0, 0, 0,  0.10) 0px 4px 6px -1px;
+    box-shadow:rgba(0, 0, 0, 0.3) 0px 7px 29px 5px;
+  }
+}
+
+
 
 

@@ -3,33 +3,50 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { api } from '../../services/api';
+import { removeRoom} from '../../services/socket'
+
 
 //import "./styles.css";
 export default function RoomOptions(props){
 
+  const profile = useSelector(state => state.profile)
+
   const [confirmWindow, setconfirmWindow] = useState(false)
 
-  const [roomOptions, setRoomOptions] = useState()
+  const [roomId, setRoomId] = useState()
 
   const dispatch = useDispatch()
 
   function close(){
-    console.log("roomOptions, close()")
+    
     dispatch({type: "UNSET_WINDOW"})
-    setRoomOptions(undefined)
+    setRoomId(undefined)
     setconfirmWindow(false)
   }
 
   function deleteChatHistory(roomId){
-    console.log(roomId)
+
     api.delete(`/user/rooms/${roomId}`)
-    .then(console.log('deu bom'))
+    .then()
+    const otherUser = props.roomData.users.filter(user => user !== profile._id)
+    
+    removeRoom(props.roomData, otherUser)
+  }
+
+  function handleOpenProfile(roomData){
+    
+    const otherProfile = roomData.users.filter(user => user._id !== profile._id);
+    console.log(otherProfile[0])
+    if(otherProfile.length < 2){
+      dispatch({type:'SET_PROFILE_SECTION', data: otherProfile[0]})
+      close()
+    }
   }
 
   useEffect(() => {
     if (props.show=== true) {
-      console.log("roomOptions", props.roomId)
-      setRoomOptions(props.roomId)
+      console.log(props.roomData.users.filter(user => user !== profile._id))
+      setRoomId(props.roomData._id)
     } else{
       close()
     }
@@ -38,10 +55,10 @@ export default function RoomOptions(props){
   return(
     <>
       {confirmWindow === false? 
-        <div className="message-window">
+        <div className="dialog-container">
           <div
             className="window-options"
-            onClick={() => console.log(roomOptions)}
+            onClick={() => handleOpenProfile(props.roomData)}
           >
             <span>Open profile</span>
           </div>
@@ -59,12 +76,12 @@ export default function RoomOptions(props){
           </div>
         </div>
       :
-        <div className="message-window">
-          <span>Delete all messages with this user?</span>
+        <div className="dialog-container">
+          <span className="dialog">Delete all messages with this user?</span>
           <div className="buttons">
             <button 
               onClick={()=> {
-                deleteChatHistory(roomOptions) 
+                deleteChatHistory(roomId) 
                 close()
                }}
             >

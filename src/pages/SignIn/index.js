@@ -4,6 +4,8 @@ import { api } from '../../services/api';
 import { login, isAuthenticated } from '../../services/auth';
 import './styles.css';
 
+import logo from '../../assets/logo-bigger.svg'
+
 const SignIn = () => {
   const [data, setData] = useState({
     email: '',
@@ -25,7 +27,7 @@ const SignIn = () => {
     if (!email || !password) {
       setData({
         ...data,
-        error: 'Preencha todos os campos'
+        error: 'All field\'s required'
       })
     } else {
       const response = await api.post('/user/authenticate', { email, password });
@@ -43,25 +45,36 @@ const SignIn = () => {
 
   return (
     <div className="SignIn">
+      {/* <div className="application-intro">
+        <img src={logo} alt="logo"/>
+        <span>Nexum</span>
+      </div> */}
       <form className="form" onSubmit={(e) => HandleSignIn(e)} >
-        <h3 className="Logo">...</h3>
+        <div className="application-intro">
+          <img src={logo} alt="logo"/>
+          <span>Nexum</span>
+        </div>
+        <div className="page-info"><span>Sign In</span></div>
         <input 
           className="input"
-          placeholder="Usuario"
+          placeholder="E-mail"
           type='text'
           onChange={e => (setData({...data,  email: e.target.value, error: ''}))}
         />
         <input 
           className="input"
-          placeholder="Senha"
+          placeholder="Password"
           type='password'
           onChange={e => (setData({...data, password: e.target.value, error: ''}))}
         />
-        <button className="form-btn"  type="submit" >Entrar</button>
-        <hr />
-        <Link className="link-btn" to='/SignUp'>Cadastrar</Link>
+        <button className="form-btn"  type="submit" >Enter</button>
+        
         {data.error && <p className="alerti">{data.error}</p>}
-        <Link className="forgot" to='/'>Esqueceu a senha?</Link>
+        <hr />
+        <div className="form-navigation">
+          <Link className="link-btn" to='/SignUp'>SignUp</Link>
+          <Link className="link-btn" to='/ForgotPassword'>Forgot password?</Link>
+        </div>
       </form>
     </div>
   )

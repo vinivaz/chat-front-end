@@ -3,7 +3,8 @@
 
 }
 
-.ImprovisedProfilePic .k
+.ImprovisedProfilePic .colored-icon
 {
+  filter: grayscale(100%);
   
 }

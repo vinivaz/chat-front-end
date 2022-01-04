@@ -2,7 +2,7 @@
 {
   
   position: absolute; /* Stay in place */
-  z-index: 7; /* Sit on top */
+  z-index: 11; /* Sit on top */
    /* Location of the box */
   width: 100%; /* Full width */
   height: 100%; /* Full height */
@@ -25,72 +25,110 @@
   cursor: pointer;
 }
 
-.window .window-content .message-window
+.window .window-content .dialog-container
 { position: absolute;
   background-color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
-  max-width: 200px;
-  width: 50%;
+  max-width: 250px;
+  box-sizing: content-box;
 
-  /*
-    left:40%;
-  */
   top:40%;
-  
-  
- 
   flex-direction: column;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 2.5rem;
   border-radius: 7px;
 }
 
-.window .window-content .message-window .window-options
+.window .window-content .dialog-container .dialog
+{
+  padding: 5px;
+  
+}
+
+.window .window-content .dialog-container .dialog
+{
+  padding: 20px;
+}
+
+.window .window-content .dialog-container .info
+{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 10px;
+}
+
+.window .window-content .dialog-container .info .info-content
+{ 
+  
+  border: solid 1px #ddd;
+  border-radius: 20px;
+  position: absolute;
+  top: 55px;
+  background-color: white;
+  padding: 20px;
+  z-index: 1000;
+  
+}
+
+.window .window-content .dialog-container .window-options
 { display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px;
+  padding: 10px 30px;
   width: 100%;
 }
 
-.window .window-content .message-window .window-options:hover
+.window .window-content .dialog-container .window-options:hover
 {
   background-color: #ddd;
 }
 
-.window .window-content .message-window .window-options:first-of-type
+.window .window-content .dialog-container .window-options:first-of-type
 {
   border-radius: 7px 7px 0 0;
 }
 
-.window .window-content .message-window .window-options:last-of-type
+.window .window-content .dialog-container .window-options:last-of-type
 {
   border-radius: 0 0 7px 7px;
 }
 
-.window .window-content .message-window .buttons
+.window .window-content .dialog-container .buttons
 { 
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
 }
 
-.window .window-content .message-window .buttons button
+.window .window-content .dialog-container input
+{
+  text-align: center;
+  outline: none;
+  padding: 5px;
+  border-radius: 15px;
+  border: solid 1px #ddd;
+  width: 85%;
+}
+.window .window-content .dialog-container .buttons button
 {
   margin: 10px;
+  border-radius: 10px;
+  border: solid 1px #ddd;
+  padding: 5px;
 }
 
 .window .window-content .view-image .close-set 
 { z-index: 7;
   position: absolute;
   background-color: #fff;
-  padding: 10px;
   border-radius: 7px;
   top: 2%;
-  left: 90%;
+  left: 73%;
   box-shadow: 0 0 0.5em black;
 }
 
@@ -100,7 +138,7 @@
   z-index: 7;
   font-size: 28px;
   font-weight: bold;
-  
+  padding: 10px;
 }
 
 .view-image

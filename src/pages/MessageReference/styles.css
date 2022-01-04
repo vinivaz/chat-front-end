@@ -1,12 +1,8 @@
 .msg-ref
 {
-  
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  
-  
-  
 }
 
 .msg-ref .msg-ref-data
@@ -31,6 +27,9 @@
   flex-direction: column;
   align-items: flex-end;
   font-size: 12px;
+  
+  
+  
   /*
   display: flex;
   flex-direction: column;
@@ -45,8 +44,9 @@
 }
 
 .msg-ref .msg-ref-data .me
-{ opacity: 0.5;
-  border: 1px solid #efefef;
+{ 
+  /* opacity: 0.5; */
+  
   border-radius: 25px;
   background-color: #333333;
   padding: 5px 10px;
@@ -55,13 +55,41 @@
   word-wrap: break-word;
   text-align: center;
   color:white;
-  overflow-wrap: break-word;
-  text-align: justify;
   
-  line-height: 18px;
+  
+  /* line-height: 18px; */
+
+  line-break:auto;
+  overflow-wrap: break-word;
   white-space: normal;
-  justify-content: center;
+  vertical-align: baseline;
+  max-width: 236px;
+  text-align: justify; 
+  position: relative;
+  box-shadow:rgba(0, 0, 0, 0.3) 0px 2px 1px 0px;
 }
+
+/* .msg-ref .msg-ref-data .me::before,
+.msg-ref .msg-ref-data .me::after
+{
+  content: "";
+	position: absolute;
+
+	height: 10px;
+	width: 20px;
+
+	bottom: 0;
+}
+
+.msg-ref .msg-ref-data .me::before
+{ 
+  left: 185px;
+  top: 46px;
+  border-radius: 0 0 10px 0;
+  -moz-border-radius: 0 0 10px 0;
+  -webkit-border-radius: 0 10px 0 0;
+  box-shadow: 13px -2px 0 0 #333333;
+} */
 
 .msg-ref .msg-ref-data .them
 { 

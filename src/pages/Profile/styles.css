@@ -1,27 +1,46 @@
+
 .profile-component
 {
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-direction: column;
   height: 100vh;
-  max-width: 400px;
+  max-width: 415px;
   width:100%;
+  overflow-y: auto;
   
 }
 
-.profile-component .content
-{
-  display: flex;
-  flex-direction: column;
+.profile-component .border
+{ display: flex;
   align-items: center;
   justify-content: center;
-  border:solid 1px #ddd;
-  background-color: white;
-  height:80vh;
+  position: relative;
+  height:85vh;
+  background: linear-gradient(217deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%),
+  linear-gradient(127deg, rgba(0,255,0,.8), rgba(0,255,0,0) 70.71%),
+  linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%);
+  padding: 5px;
   border-radius: 25px;
 }
 
-.profile-component .content .profile-data
+
+
+.profile-component .content
+{ height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  background-color: white;
+  border-radius: 25px;
+}
+
+
+.profile-component  .content .profile-data
 {
   display: flex;
   flex-direction: column;
@@ -29,12 +48,17 @@
   justify-content: center;
 }
 
-.profile-component .content .profile-data .profile-pic img
-{
+.profile-component  .content .profile-data .profile-pic img
+{ 
+  display: flex;
   border-radius: 50px;
+  max-height: 100px;
+  max-width: 100px;
+  width: 100%;
+  height: 100%;
 }
 
-.profile-component .content .profile-data .profile-name
+.profile-component  .content .profile-data .profile-name
 { 
   display: flex;
   align-items: center;
@@ -44,19 +68,220 @@
   font-family: helvetica;
 }
 
-.profile-component .content .profile-data .profile-email
+.profile-component  .content .profile-data .profile-email
 {
   display: flex;
   align-items: center;
   justify-content: center;
   color: black;
   font-family: helvetica;
-  font-size: 11.5px;
+  font-size: 2.3rem;
   color: #8e8e8e;
 }
 
-.profile-component .content .profile-details
+.profile-component  .content .profile-settings
+{ /*margin-top: 50px;*/
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 2.5rem;
+  width: 70%;
+}
+
+.profile-component  .content .loading
+{
+  filter:blur(3px)
+}
+
+.profile-component  .content .profile-settings .settings-item
+{
+  width: 100%;
+  padding:10px;
+  
+}
+
+.profile-component  .content .profile-settings .settings-item span{
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: black;
+  background-color: #f0f0f0;
+  border-radius: 50px;
+  margin: 10px 0;
+  padding: 2px 10px;
+}
+
+.profile-component  .content .profile-settings .settings-item input
+{
+  border: none;
+  text-align: center;
+  background-color: #f0f0f0;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 50px;
+  width: 100%;
+  margin: 5px 0;
+}
+
+.profile-component  .content .profile-settings .settings-item button
+{
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 10px;
+  color:white;
+  width: 100%;
+}
+
+.profile-component  .content .profile-settings .settings-item .ok
+{
+  
+  background-color: lawngreen;
+  
+  /*
+  box-shadow: 0 0 20px 5px lawngreen;
+  */    
+
+}
+
+.profile-component  .content .profile-settings .settings-item .ok:hover
+{
+  background-color: lightgreen;
+}
+
+.profile-component  .content .profile-settings .settings-item .waiting
+{
+  background-color: red;
+}
+
+.profile-component  .content .profile-settings .settings-item input:focus
+{
+  outline: none;
+}
+
+.profile-component  .content .profile-details
 {
   display: flex;
+  font-size: 2.5rem;
 }
+
+@media (max-width: 615px) {
+  .profile-component
+  {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    max-width: 415px;
+    width:100%;
+    overflow-y: auto;
+    
+  }
+  
+}
+
+@media (max-width: 350px) {
+
+  .profile-component  .content .profile-data .profile-pic img
+  { 
+    display: flex;
+    border-radius: 50px;
+    max-height: 70px;
+    max-width: 70px;
+    width: 100%;
+    height: 100%;
+  }
+  
+}
+
+@media (max-height: 500px) {
+
+  .profile-component  .content .profile-data .profile-pic img
+  { 
+    display: flex;
+    border-radius: 50px;
+    max-height: 80px;
+    max-width: 80px;
+    width: 100%;
+    height: 100%;
+  }
+  
+}
+
+@media (max-height: 450px) {
+
+  .profile-component  .content .profile-data .profile-pic img
+  { 
+    display: flex;
+    border-radius: 50px;
+    max-height: 70px;
+    max-width: 70px;
+    width: 100%;
+    height: 100%;
+  }
+
+  .profile-component  .content .profile-data .profile-name
+  { 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    font-size: 2.5rem;
+    font-family: helvetica;
+  }
+
+  .profile-component  .content .profile-data .profile-email
+  {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    font-family: helvetica;
+    font-size: 2.1rem;
+    color: #8e8e8e;
+  }
+
+  .profile-component  .content .profile-settings .settings-item span{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: black;
+    background-color: #f0f0f0;
+    border-radius: 50px;
+    margin: 10px 0;
+    padding: 2px 8px;
+    font-size: 2.2rem;
+  }
+
+  .profile-component  .content .profile-settings .settings-item input
+  {
+    border: none;
+    text-align: center;
+    background-color: #f0f0f0;
+    align-items: center;
+    justify-content: center;
+    padding: 7px;
+    border-radius: 50px;
+    width: 100%;
+    margin: 3px 0;
+  }
+
+  .profile-component  .content .profile-settings .settings-item button
+  {
+    border: none;
+    border-radius: 10px;
+    padding: 7px;
+    margin-top: 7px;
+    color:white;
+    width: 100%;
+  }
+
+  .profile-component  .content .profile-settings .settings-item
+  {
+    width: 100%;
+    padding: 5px;
+    
+  }
+  
+}
+
+
 

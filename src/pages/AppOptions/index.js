@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
-import { logout} from '../../services/auth';
 
-import { api } from '../../services/api';
+import { logout} from '../../services/auth';
 
 export default function AppOptions(props){
 
@@ -18,8 +17,6 @@ export default function AppOptions(props){
   const dispatch = useDispatch()
 
   function close(){
-    console.log("userOptions, close()")
-
     dispatch({type: "UNSET_WINDOW"})
     setAppOpt(false)
   }
@@ -30,14 +27,12 @@ export default function AppOptions(props){
     history.push('/')
   }
 
-  function chancePicture(url){
-
-    console.log("sideBar, chancePicture")
-    dispatch({type: 'SET_WINDOW', data: { open:true, url: url} })
+  function openPicture(url){
+    dispatch({type: 'SET_WINDOW', data: { open: true, url: `http://${url}`}})
   }
 
   function openProfile(){
-    dispatch({type:'SET_PROFILE_SECTION', data:profile._id})
+    dispatch({type:'SET_PROFILE_SECTION', data: profile._id})
   }
 
   useEffect(() => {
@@ -54,7 +49,7 @@ export default function AppOptions(props){
   return(
     <>
       {confirmWindow === false? 
-        <div className="message-window">
+        <div className="dialog-container">
           <div
             className="window-options"
             onClick={() => {
@@ -67,10 +62,10 @@ export default function AppOptions(props){
           {profile.profile_img !== "" ?
             <div
             className="window-options"
-            onClick={() => chancePicture(profile.profile_img)}
+            onClick={() => openPicture(profile.profile_img)}
 
             >
-              <span>See profile picture</span>
+              <span>Open profile picture</span>
             </div>
             :
             ""
@@ -91,9 +86,9 @@ export default function AppOptions(props){
           </div>
         </div>
       :
-        <div className="message-window">
-          <span id="close" onClick={() => close()} className="close">&times;</span>
-          <span>Logout?</span>
+        <div className="dialog-container">
+          
+          <span className="dialog">Logout?</span>
           <div className="buttons">
             <button 
               onClick={()=> {

@@ -1,10 +1,12 @@
-.room-info
+.room
 {
   display: flex;
   align-items: center;
   flex-direction: row;
+  background-color: #f8f7f7;
 }
-.room-info .room-seila
+
+.room .room-features
 {
   color: black;
   text-decoration: none;
@@ -14,14 +16,38 @@
   justify-content:space-between;
   overflow-y: auto;
   width: 100%;
+  
 }
 
-.room-info img
+.room .room-features .user-icon
+{
+  position: relative;
+}
+
+.room .room-features .user-icon .improvised-profile-pic .colored-icon
+  {
+    height: 50px;
+    width: 50px;
+  }
+
+.room .room-features .user-icon img
 {
   border-radius: 50px;
 }
 
-.room-info .room-seila .room-data
+.room .room-features .user-icon .online-sign
+{ 
+  position: absolute;
+  left: 71%;
+  top: 69%;
+  height: 12px;
+  width: 12px;
+  background-color: lawngreen;
+  border-radius: 50%;
+  border: 2px solid #f8f7f7;
+}
+
+.room .room-features .room-text
 { 
   width: 100%;
   display: flex;
@@ -30,52 +56,48 @@
   flex-direction: column;
 }
 
-.room-info .room-seila .room-data .user-name
+.room .room-features .room-text .user-name
 {
   padding: 2px 15px;
   font-size: 11.5px;
 }
 
-.room-info .room-seila .room-data .last-message
+.room .room-features .room-text .last-message
 {
   font-size: 10.5px;
   color: #8e8e8e;
-  padding: 1px 15px;
+  padding: 1px 10px;
 }
 
-.room-info .sidebar-options
+.room .sidebar-options
 {
-  
   position: relative;
   height:5px;
   width:5px;
 }
 
-.room-info .sidebar-options .settlement
+.room .sidebar-options .settlement
 { 
   position: absolute;
   top: -116%;
   left: -425%;
-  
-  
 }
 
-.room-info .sidebar-options .settlement .options
+.room .sidebar-options .settlement .options
 {
   width: 5px;
   height: 5px;
   font-size: 15px;
   color: #333333;
-  
 }
 
-.room-info .sidebar-options .settlement .options .popup-icon svg:hover
+.room .sidebar-options .settlement .options .popup-icon svg:hover
 {
   background-color: #ddd;
   border-radius: 3px;
 }
 
-.room-info .sidebar-options .settlement .options .popup-show
+.room .sidebar-options .settlement .options .popup-show
 {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   visibility: show;
@@ -93,11 +115,106 @@
   left: 824%;
 }
 
-.room-info .sidebar-options .settlement .options .popup-show .options-item
+.room .sidebar-options .settlement .options .popup-show .options-item
 {
   border-bottom: solid 1px #ddd;
   padding: 5px;
   width: 100%;
+}
+
+@media (max-width: 760px){
+
+  /* .room .room-features .user-icon .online-sign
+  { 
+    
+    left: 22%;
+    top: 70%;
+    
+  } */
+
+}
+
+@media (max-width: 615px){
+
+  .room .room-features .user-icon img
+  {
+    height: 43px;
+    width: 43px;
+  }
+  
+  .shruken .chat-history .room .room-features
+  {
+    color: black;
+    text-decoration: none;
+    padding: 6px;
+    display:flex;
+    flex-direction: row;
+    justify-content:space-between;
+    overflow-y: auto;
+    width: 100%;
+  }
+
+  .room .room-features .user-icon .improvised-profile-pic .colored-icon
+  {
+    height: 43px;
+    width: 43px;
+  }
+
+  /* .room .room-features .user-icon .online-sign
+  { 
+    
+    left: 19%;
+    top: 70%;
+    
+  } */
+
+  .hidden .chat-history .room .room-features .improvised-profile-pic .colored-icon
+  {
+    display: none
+  }
+
+  .hidden .chat-history 
+  {
+    display: none
+  }
+
+  .hidden .chat-history .room-item
+  {
+    display: none
+  }
+
+  .hidden .chat-history .room .room-features .room-text
+  { 
+    display: none;
+  }
+
+  .hidden .chat-history .room .sidebar-options
+  {
+    display: none;
+  }
+
+  .shruken .chat-history .room .room-features .room-text
+  { 
+    display: none;
+  }
+
+  .shruken .chat-history .room .sidebar-options
+  {
+
+    display: none;
+  }
+
+  .room .room-features
+  {
+    display:flex;
+    flex-direction: row;
+    justify-content:center;
+    color: black;
+    text-decoration: none;
+    overflow-y: auto;
+    width: 100%;
+  }
+
 }
 
 

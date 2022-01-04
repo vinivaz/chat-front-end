@@ -1,11 +1,19 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { api } from '../../services/api';
+import { deleteMsg } from '../../services/socket';
 
-export default function MessageOptions({show, messageId, messageAction}){
+export default function MessageOptions({show, messageData, messageAction}){
 
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    if(messageData!== undefined){
+      console.log("messageOptions:",messageData._id)
+    }
+    
+  }, [messageData])
 
   const Tools = {
     "delete": {
@@ -14,7 +22,9 @@ export default function MessageOptions({show, messageId, messageAction}){
         api.delete(`/messages/${id}`)
         .then(response =>{
           console.log(response.data)
-          dispatch({type: "SET_DELETED_MESSAGE", data: {deleted_message: 0}})
+          close()
+          dispatch({type: "SET_DELETED_MESSAGE", data: {deleted_message: messageData._id}})
+          deleteMsg(messageData.room, messageData._id)
         })
         .catch(function (error){
           console.log(error)
@@ -28,12 +38,13 @@ export default function MessageOptions({show, messageId, messageAction}){
         api.put(`/messages/deleteToOne`, {messageId: id})
         .then(response =>{
           console.log(response.data)
+          dispatch({type: "HIDE_MSG_TO_ONE", data: {hidden_message: messageData._id}})
           close()
         })
         .catch(function (error){
           console.log(error)
         })
-      
+        
       }
     },
     "answer": {
@@ -47,7 +58,6 @@ export default function MessageOptions({show, messageId, messageAction}){
       },
     }
   }
-
 
   /*function checkTools(item){
     
@@ -64,18 +74,17 @@ export default function MessageOptions({show, messageId, messageAction}){
 
   function close(){
     console.log("messageOptiosn")
-    dispatch({type: "SET_IMAGE_WINDOW", data: {open:false, url:"", message_action: undefined, message_id: undefined}})
+    dispatch({type: "UNSET_WINDOW"})
     
   }
   return(
     <>
-      {messageId&&<div className="message-window">
-        <span id="close" onClick={() => close()} className="close">&times;</span>
+      {messageData&&<div className="dialog-container">
         <span>{Tools[messageAction].text}</span>
         <div className="buttons">
           <button 
             onClick={()=> {
-              Tools[messageAction].finalAction(messageId) 
+              Tools[messageAction].finalAction(messageData._id) 
               close()
             }}
           >
@@ -86,5 +95,4 @@ export default function MessageOptions({show, messageId, messageAction}){
       </div>}
     </>  
   )
-
 }

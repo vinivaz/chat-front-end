@@ -2,9 +2,11 @@ import { createStore } from 'redux';
 
 const INITIAL = {
   profile:{},
-  other_profile_id:"",
+  other_profile:"",
+  online_users: undefined,
   room: {
     room_id: "",
+    room_data: undefined
   },
   current_content: {
     room: false,
@@ -13,25 +15,39 @@ const INITIAL = {
   edit_profile_pic: {
     open: false,
   },
+  new_message: {
+    active: false,
+    message_data: undefined,
+  },
   answering_message: {
     active: false,
     message_id: ''
   },
   deleted_message: null,
+  hidden_message: null,
   delete_room_window: {
     open: false,
+  },
+  navigation: {
+    show_users: false,
+    show_sidebar: false,
+    expanded_sidebar: false,
   },
   window:{
     open: false,
     app_options: false,
+    user_data: undefined,
     profile_data: undefined,
     url: undefined,
     message_action: undefined,
     message_id: undefined,
+    message_data: undefined,
+    room_data: undefined,
+    delete_account: undefined
   },
 }
 
-function profile(state = INITIAL, action){
+function appState(state = INITIAL, action){
   switch(action.type){
     case 'SET_PROFILE':
       console.log(action)
@@ -45,11 +61,18 @@ function profile(state = INITIAL, action){
       case 'SET_PROFILE_SECTION':
       console.log(action)
       return {...state,
-        other_profile_id: action.data,
+        other_profile: action.data,
         current_content: {
           room: false,
           profile: true
-        }
+        },
+        room: INITIAL.room
+      }
+      case 'SET_ONLINE_USERS':
+      console.log(action)
+      return {
+        ...state,
+        online_users: action.data
       }
       case 'SET_ROOM':
       console.log("action: ", action, "state: ", state)
@@ -77,6 +100,51 @@ function profile(state = INITIAL, action){
         ...state,
         window: INITIAL.window
       }
+      case 'TOGGLE_USERS':
+      console.log(action)
+      return {
+        ...state,
+        navigation:{
+          ...state.navigation,
+          show_users: !state.navigation.show_users
+        }
+      }
+      case 'SHRINK_SIDEBAR':
+      console.log(action)
+      return {
+        ...state,
+        navigation:{
+          ...state.navigation,
+          expanded_sidebar: false,
+          show_sidebar: true
+        }
+      }
+      case 'EXPAND_SIDEBAR':
+      console.log(action)
+      return {
+        ...state,
+        navigation:{
+          ...state.navigation,
+          expanded_sidebar: true,
+          show_sidebar: true
+        }
+      }
+      case 'HIDE_SIDEBAR':
+      console.log(action)
+      return {
+        ...state,
+        navigation:{
+          ...state.navigation,
+          show_sidebar: false,
+          expanded_sidebar: false,
+        }
+      }
+      case 'SET_NEW_MESSAGE':
+      console.log("action: ", action, "state: ", state)
+      return {
+        ...state,
+        new_message: action.data
+      }
       case 'SET_ANSWER_MESSAGE':
       console.log("action: ", action, "state: ", state)
       return {
@@ -88,6 +156,12 @@ function profile(state = INITIAL, action){
       return {
         ...state,
         deleted_message: action.data.deleted_message
+      }
+      case 'HIDE_MSG_TO_ONE':
+      console.log(action)
+      return {
+        ...state,
+        hidden_message: action.data.hidden_message
       }
       case 'SET_PROFILE_PIC':
       console.log(action)
@@ -105,7 +179,7 @@ function profile(state = INITIAL, action){
   }
 }
 
-const store = createStore(profile);
+const store = createStore(appState);
 
 export default store;
 

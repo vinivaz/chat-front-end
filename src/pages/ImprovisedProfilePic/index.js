@@ -18,14 +18,14 @@ export default function ImprovisedProfilePic({user, width, height, circle}){
   }
 
   return(
-    <div className="ImprovisedProfilePic">
+    <div className="improvised-profile-pic">
       <div
-      className="k"
+      className="colored-icon"
       style={{
         backgroundColor: user._id === undefined?"#fff":stringToColour(user._id),
         borderRadius: circle ===true? 50 +"px": "3px",
-        width: width + "px",
-        height: height + "px",
+        width: width !== undefined? width + "px": '',
+        height: height !== undefined ? height + "px": '',
       }}
       >
       </div>

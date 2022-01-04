@@ -33,6 +33,7 @@ export default function ProfileOptions(props){
           url_data: imageDataUrl
         }
       })
+      close()
     }
   }
 
@@ -45,32 +46,52 @@ export default function ProfileOptions(props){
   }
 
   function getUserHistory(userId){
-    api.get(`/user/rooms/byUserId/${userId}`)
-    .then(response => {
-      if(response.data.room.length=== 0){
-        api.post('/user/rooms', { usersReceiver: [userId] } )
-        .then(response => {
-          console.log(response)
-          if(response.data.error){
-            alert('failed, try again')
+    
+    
+    api.post(`/user/rooms/byUsers`, {id1: userId, id2: profile._id})
+    .then(firstResponse => {
+
+      if(firstResponse.data.room.length=== 0){
+
+        api.post(`/user/rooms/byUsers`, {id1: profile._id, id2: userId})
+        .then(secondResponse => {
+
+          if(secondResponse.data.room.length=== 0){
+
+            api.post('/user/rooms', { usersReceiver: [userId] } )
+            .then(response => {
+
+              console.log(response)
+
+              if(response.data.error){
+                alert('failed, try again')
+                close()
+              }else{
+                dispatch({type: 'SET_ROOM', data: { room_id: response.data.room._id, room_data: response.data.room }})
+                close()
+              }
+            })
           }else{
-            alert('deu bom, dps faço o resto')
+            console.log(secondResponse.data)
+            const room_id = secondResponse.data.room[0]._id;
+            dispatch({type: 'SET_ROOM', data: { room_id, room_data: secondResponse.data.room[0] }})
+            close()
           }
         })
+      
       }else{
-        console.log(response.data.room[0].users)
-        
-        const notYou = response.data.room[0].users.filter(props => props !==profile._id)
-        if(notYou.length > 0){
-          dispatch({type: 'SET_ROOM', data: { room_id: notYou }})
-        }
+        console.log(firstResponse.data)
+        const room_id = firstResponse.data.room[0]._id;
+        dispatch({type: 'SET_ROOM', data: { room_id, room_data: firstResponse.data.room[0] }})
+        close()
       }
+     
     })
   }
 
   function showProfilePic(){
     console.log("profileOptions, show profilePc")
-    dispatch({type: "SET_WINDOW", data: {open: true, url: props.profileData.profile_img}})
+    dispatch({type: "SET_WINDOW", data: {open: true, url: `http://${props.profileData.profile_img}`}})
   }
 
   function deleteProfilePic(){
@@ -101,13 +122,13 @@ export default function ProfileOptions(props){
   return(
     <>
       {confirmWindow === false? 
-        <div className="message-window">
+        <div className="dialog-container">
           {props.profileData.profile_img !== "" ?
             <div
             className="window-options"
             onClick={() => showProfilePic()}
             >
-              <span>See Picture</span>
+              <span>Open Picture</span>
             </div>
           :
             ""
@@ -128,7 +149,7 @@ export default function ProfileOptions(props){
                 inputFile = input;
                 }}
               />
-              <span>Change Picture</span>
+              <span>Insert Picture</span>
             </div>
             <div
               className="window-options"
@@ -153,9 +174,8 @@ export default function ProfileOptions(props){
             </div>
         </div>
       :
-        <div className="message-window">
-          <span id="close" onClick={() => close()} className="close">&times;</span>
-          <span>Delete you profile picture?</span>
+        <div className="dialog-container">
+          <span className="dialog">Delete you profile picture?</span>
           <div className="buttons">
             <button 
               onClick={()=> {

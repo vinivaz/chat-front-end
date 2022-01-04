@@ -5,6 +5,7 @@ import { isAuthenticated } from './services/auth';
 import SignUp from './pages/SignUp';
 import ContextProvider from './components/Provider';
 import SignIn from './pages/SignIn';
+import ForgotPassword from './pages/ForgotPassword';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route {...rest} render={props => (
@@ -21,6 +22,7 @@ const MainRoutes = () => (
         <Switch>
             <Route path="/" exact component={() => <SignIn/>} />
             <Route path="/SignUp" component={() => <SignUp/>} />
+            <Route path="/ForgotPassword" component={() => <ForgotPassword/>} />
             <PrivateRoute path='/app' component={() => <ContextProvider/>}/>
             <Route path="*" component={() => <h1>Page not found</h1>} />
         </Switch>

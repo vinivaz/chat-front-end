@@ -1,0 +1,77 @@
+.typing_animation
+{ 
+  position:relative;
+}
+
+.container
+{
+  /* position: absolute;
+  top: -56px;
+  left: 4%; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border: none;
+  width: 60px;
+  height: 25px;
+  border-radius: 10px;
+  z-index: 3;
+  box-shadow:rgba(0, 0, 0, 0.3) 0px 2px 1px 0px;
+}
+
+.typing_animation .origin-indicator
+{ 
+  width: 0; 
+  height: 0; 
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid rgba(0, 0, 0, 0.3);
+  position: absolute; 
+  top: 25px;
+  left: 8px;
+
+}
+
+.typing_animation .container span 
+{
+  width: 4px;
+  height: 4px;
+  margin: 4px;
+  animation: typing 1s ease-in-out infinite;
+  background-color: rgb(201, 200, 200);
+  border-radius: 50%;
+}
+
+.typing_animation .container span:nth-child(1)
+{
+  animation-delay: 0.2s;
+}
+.typing_animation .container span:nth-child(2)
+{
+  animation-delay: 0.4s;
+}
+
+.typing_animation .container span:nth-child(3)
+{
+  animation-delay: 0.6s;
+}
+
+@keyframes typing {
+  0%{
+    width: 4px;
+    height: 4px;
+  }
+
+  100%{
+    width: 8px;
+    height: 8px;
+  }
+
+  /* from {width: 5px;
+    height: 5px;}
+  to {width: 10px;
+    height: 10px;} */
+}
+

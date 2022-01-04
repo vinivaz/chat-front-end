@@ -26,41 +26,58 @@ export default function UserOptions(props){
   }
 
   function getUserHistory(userId){
-    api.get(`/user/rooms/byUserId/${userId}`)
-    .then(response => {
-      
-      if(response.data.room.length=== 0){
-        api.post('/user/rooms', { usersReceiver: [userId] } )
-        .then(response => {
-          console.log(response)
-          if(response.data.error){
-            alert('failed, try again')
+    
+    
+    api.post(`/user/rooms/byUsers`, {id1: userId, id2: profile._id})
+    .then(firstResponse => {
+      if(firstResponse.data.error)return;
+      if(firstResponse.data.room.length=== 0){
+
+        api.post(`/user/rooms/byUsers`, {id1: profile._id, id2: userId})
+        .then(secondResponse => {
+          if(secondResponse.data.error)return;
+          if(secondResponse.data.room.length=== 0){
+
+            api.post('/user/rooms', { usersReceiver: [userId] } )
+            .then(response => {
+
+              console.log(response)
+
+              if(response.data.error){
+                alert('failed, try again')
+                close()
+              }else{
+                dispatch({type: 'SET_ROOM', data: { room_id: response.data.room._id, room_data: response.data.room }})
+                close()
+              }
+            })
           }else{
-            alert('deu bom, dps faço o resto')
+            console.log(secondResponse.data)
+            const room_id = secondResponse.data.room[0]._id;
+            dispatch({type: 'SET_ROOM', data: { room_id, room_data: secondResponse.data.room[0] }})
+            close()
           }
         })
+      
       }else{
-        console.log(response.data.room[0].users)
-        
-        const notYou = response.data.room[0].users.filter(props => props !==profile._id)
-        if(notYou.length > 0){
-          dispatch({type: 'SET_ROOM', data: { room_id: notYou }})
-        }
-        
+        console.log(firstResponse.data)
+        const room_id = firstResponse.data.room[0]._id;
+        dispatch({type: 'SET_ROOM', data: { room_id, room_data: firstResponse.data.room[0] }})
+        close()
       }
      
     })
   }
 
-  function openProfile(profileId){
-    dispatch({type:'SET_PROFILE_SECTION', data:profileId})
+  function openProfile(userData){
+    dispatch({type:'SET_PROFILE_SECTION', data:userData})
     close()
   }
 
   useEffect(() => {
     if (props.show=== true) {
 
-      setUserId(props.userId)
+      setUserId(props.userData._id)
       
     } else{
       close()
@@ -70,17 +87,17 @@ export default function UserOptions(props){
   return(
     <>
       {confirmWindow === false? 
-        <div className="message-window">
+        <div className="dialog-container">
           <div
             className="window-options"
-            onClick={() => openProfile(props.userId)}
+            onClick={() => openProfile(props.userData)}
           >
-            <span>See profile</span>
+            <span>Open profile</span>
           </div>
-          {props.userId!==profile._id ? 
+          {props.userData._id!==profile._id ? 
             <div
             className="window-options"
-            onClick={() => getUserHistory(props.userId)}
+            onClick={() => getUserHistory(props.userData._id)}
             >
               <span>Send Message</span>
             </div>
@@ -96,8 +113,8 @@ export default function UserOptions(props){
         </div>
       :
         <div className="message-window">
-          <span id="close" onClick={() => close()} className="close">&times;</span>
-          <span>Delete all conversations?</span>
+          
+          <span className="dialog">Delete all conversations?</span>
           <div className="buttons">
             <button 
               onClick={()=> {

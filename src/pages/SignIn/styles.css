@@ -8,24 +8,67 @@
 
 .SignIn{
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 85vh;
-  
+  z-index: 2;
 }
 
-.form{
+.SignIn .application-intro
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-right: 50px;
+    padding-bottom: 23px;
+}
+
+.SignIn .application-intro span
+{
+    font-size: 3rem;
+    position: relative;
+    
+}
+
+.SignIn .application-intro img
+{
+    width: 73px;
+}
+
+.SignIn .form
+{
     width: 350px;
     background: #fff;
-    padding:  30px 40px;
+    padding-top: 10px;
+    padding-right: 40px;
+    padding-left: 40px;
+    padding-bottom: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 20px;
+    position: relative;
 }
+
+.SignIn .form .page-info
+{   
+    display: flex;
+    align-items: flex-end;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.SignIn .form .page-info span
+{
+    font-size: 2.5rem;
+    align-items: left;
+}
+
 .input {
-    border-radius: 3px;
+    
+    border-radius:10px;
     height: 37px;
     margin-bottom: 8px;
     padding: 0 10px;
@@ -34,6 +77,7 @@
     width: 100%;
     border: 1px solid #ddd;
     background: #FAFAFA;
+
 }
 ::-webkit-input-placeholder  { font-size: 12px; }
 input:-moz-placeholder { font-size: 12px; }
@@ -47,6 +91,21 @@ input:-moz-placeholder { font-size: 12px; }
    width: 100%;
    text-align: center;
    ;
+}
+
+.form-navigation
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.form-navigation .link-btn {
+    font-size: 14px;
+    color: #555;
+    text-decoration: none; 
+    margin-bottom: 5px;
 }
 
 .form-btn {

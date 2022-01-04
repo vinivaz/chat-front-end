@@ -22,6 +22,7 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    maxHeight: '90vh'
   },
   img: {
     maxWidth: '100%',

@@ -10,6 +10,8 @@ function MessageReference({messageId}){
   const profileId = useSelector(state => state.profile._id);
   const dispatch = useDispatch();
 
+  const [ thisDisplay, setThisDisplay ] = useState('initial')
+
   function getMessageData(messageId){
     api.get(`/messages/singlemessage/${messageId}`)
     .then(response => {
@@ -24,14 +26,26 @@ function MessageReference({messageId}){
     };
   }, [])
 
+  useEffect(() => {
+    if(message=== undefined|| message=== null)return;
+      console.log(message.deletedTo)
+      if(message.deletedTo === undefined ||message.deletedTo === null)return;
+      if(message.deletedTo.includes(profileId)){
+        console.log('apagaaaa')
+        setThisDisplay('none')
+      }
+      
+    
+  }, [message])
+
   return(
-    <div className="msg-ref">
+    <div className="msg-ref" style={{display: thisDisplay}}>
       {message&&
         <div className="msg-ref-data">
           {message.url === undefined ? 
             <div className={`msg-ref-text ${message.userId._id=== profileId? "me":"them"}`}>
-                {message.text.length > 45 ?
-                  (message.text.slice(0,-(message.text.length - 45)) + "...")
+                {message.text.length > 32 ?
+                  (message.text.slice(0,-(message.text.length - 32)) + "...")
                 :
                   message.text
                 }

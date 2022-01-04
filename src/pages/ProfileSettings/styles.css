@@ -1,0 +1,93 @@
+.profile-settings
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 2.5rem;
+  width: 70%;
+}
+
+.profile-settings .info
+{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 10px;
+}
+
+.profile-settings .info .info-content
+{ 
+  
+  border: solid 1px #ddd;
+  border-radius: 20px;
+  position: absolute;
+  top: 55px;
+  background-color: white;
+  padding: 20px;
+  z-index: 1000;
+  
+}
+
+.profile-settings .skeletton
+{
+  width: 100%;
+  padding: 10px;
+  filter: grayscale(50%);
+  
+}
+
+.profile-settings .skeletton:hover
+{
+  background-color: #ddd;
+}
+
+.profile-settings .skeletton .skeletton-item
+{
+  border: none;
+  background-color: #ececee;
+  margin: 20px 0;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+
+
+.profile-settings .skeletton .skeletton-half-item
+{
+  border: none;
+  border-radius: 5px;
+  padding: 7px;
+  background-color: #ddd;
+  width: 25%;
+}
+
+.profile-settings .skeletton .skeletton-btn
+{
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 20px;
+  color:white;
+  background-color: lawngreen;
+  width: 100%;
+
+}
+
+.see-more
+{
+  font-size: 50px;
+}
+
+@media (max-height: 450px) {
+
+  .profile-settings
+  {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 2.5rem;
+    width: 70%;
+  }
+  
+}

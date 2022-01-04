@@ -101,13 +101,32 @@ function EditProfile({classes}){
     })
   }, [])
 
+  const openImage = useCallback(async () => {
+    
+    try {
+      const croppedImage = await getCroppedImg(
+        imgUrl,
+        croppedAreaPixels,
+        //rotation
+      )
+      console.log('donee', { croppedImage })
+      
+      //setCroppedImage(URL.createObjectURL(croppedImage))
+      dispatch({type: "SET_WINDOW", data: {open: true, url: URL.createObjectURL(croppedImage)}})
+    } catch (e) {
+      console.error(e)
+    }
+    
+}, [croppedAreaPixels])
+
+
   useEffect(() => {
-    console.log("edit Porilfe")
+  
 
     if(test.open ===true){
       setOpen(test.open)
       setImgUrl(test.url_data)
-      console.log(test.url_data, "abubleh")
+    
       
     }else{
       setOpen(false)
@@ -123,10 +142,10 @@ function EditProfile({classes}){
         croppedAreaPixels,
         //rotation
       )
-      console.log('donee', { croppedImage })
+      
       
       //setCroppedImage(URL.createObjectURL(croppedImage))
-
+      
       file(croppedImage)
       onClose()
     } catch (e) {
@@ -141,9 +160,10 @@ function EditProfile({classes}){
     formData.append("file", newFile);
 
     const send = await api.post('/user/profile/edit', formData, {headers: {"Content-Type": `multipart/form-data; boundary=${formData._boundary}`}})
-    console.log(send, 'mdsss arrr')
+    
 
-    console.log(newFile, "newfilefdfsdfdsf")
+    dispatch({type: 'SET_PROFILE', data: send.data})
+
     //setTest(newFile)
     
   }
@@ -162,42 +182,7 @@ function EditProfile({classes}){
           />
         </div>
         
-        <div className={classes.controls}>
-          <Button
-            onClick={showCroppedImage}
-            variant="contained"
-            color={'primary'}
-            classes={{ root: classes.mRButton }}
-          >
-            Confirm
-          </Button>
-          <div className={classes.sliderContainer}>
-            <Typography
-              variant="overline"
-              classes={{ root: classes.sliderLabel }}
-            >
-              Zoom
-            </Typography>
-            <Slider
-              value={zoom}
-              min={1}
-              max={3}
-              step={0.1}
-              aria-labelledby="Zoom"
-              classes={{ root: classes.slider }}
-              onChange={(e, zoom) => setZoom(zoom)}
-            />
-            
-          </div>
-          <Button
-            onClick={()=>onClose()}
-            variant="contained"
-            color={'secondary'}
-            classes={{ root: classes.mLButton }}
-          >
-            Cancel
-          </Button>
-        </div>
+        <input className="zoom-range" type="range" min="1" max="20" onChange={(e, zoom) => setZoom(e.target.value)} value={zoom}></input>
         <ImgDialog img={croppedImage} onClose={onClose} />
       </>)}
   </div>)

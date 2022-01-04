@@ -16,7 +16,7 @@ export default function ViewImage({url}){
           <div className="close-set">
             <span onClick={() => close()} className="close">&times;</span>
           </div>
-          <img src={'http://' + url} />
+          <img src={url} />
         </div>
       }
     </>

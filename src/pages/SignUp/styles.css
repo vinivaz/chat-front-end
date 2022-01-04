@@ -6,26 +6,65 @@
     padding-bottom: 40px;
 }
 
-.SignIn{
+.SignUp{
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 85vh;
-  
 }
 
-.form{
+.SignUp .form .page-info
+{   
+    display: flex;
+    align-items: flex-end;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.SignUp .application-intro
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-right: 50px;
+    padding-bottom:23px;
+}
+
+.SignUp .application-intro span
+{
+    font-size: 3rem;
+    position: relative;
+    
+}
+
+.SignUp .application-intro img
+{
+    width: 73px;
+}
+
+.SignUp .form .page-info span
+{
+    font-size: 2.5rem;
+    align-items: left;
+}
+
+.SignUp .form{
     width: 350px;
     background: #fff;
-    padding:  30px 40px;
+    padding-top: 10px;
+    padding-right: 40px;
+    padding-left: 40px;
+    padding-bottom: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 20px;
+    
 }
 .input {
-    border-radius: 3px;
+    border-radius:10px;
     height: 37px;
     margin-bottom: 8px;
     padding: 0 10px;

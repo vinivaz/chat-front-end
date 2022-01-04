@@ -4,6 +4,7 @@ import { IoEllipsisVertical , IoMenuOutline} from "react-icons/io5";
 
 import MessagePreview from '../MessageReference';
 import Popup from "../Popup"
+import useLongPress from "../../components/useLongPress"
 
 import "./styles.css";
 import MessageReference from '../MessageReference';
@@ -17,23 +18,51 @@ export default function MyMessage(props){
 
   function showImgMsg(url){
     console.log("MyMessafe")
-    dispatch({type: "SET_WINDOW", data: {open: true, url: url}})
+    dispatch({type: "SET_WINDOW", data: {open: true, url: `http://${message.url}`}})
   }
 
+  const onLongPress = () => {
+    console.log('longpress is triggered');
+    setisOptShown(true)
+  };
+
+  const onClick = () => {
+    console.log('click is triggered')
+    if(message.url !== undefined){
+      dispatch({type: "SET_WINDOW", data: {open: true, url: `http://${message.url}`}})
+    }
+  }
+  
+  const defaultOptions = {
+    shouldPreventDefault: true,
+    delay: 400,
+  };
+
+  const longPressEvent = useLongPress(onLongPress, onClick, defaultOptions);
+
   return(
-    <div id={message._id} className="msg-box">
-      <div className="me" onDoubleClick={() =>setisOptShown(true)}>
+    <div
+      id={message._id}
+      className="msg-box"
+      style={{display: props.deleted === true ? 'none' : 'initial' }}
+    >
+      <div
+        className="me"
+        //onDoubleClick={() =>setisOptShown(true)}
+        
+      >
         {message.respondedTo !== undefined ? 
           <div className="msg-details">
             <MessageReference messageId={message.respondedTo} />
+            <div className="bound"></div>
             {message.url !== undefined?
               <img 
               src={'http://'+ message.url}
               alt="message img"
-              onClick={() => showImgMsg(message.url)}
+              {...longPressEvent}
               />
             :
-              <span>{message.text}</span>
+              <span {...longPressEvent}>{message.text}</span>
             }
           </div>
         :
@@ -42,10 +71,15 @@ export default function MyMessage(props){
             <img 
             src={'http://'+ message.url}
             alt="message img"
-            onClick={() => showImgMsg(message.url)}
+            //onClick={() => showImgMsg(message.url)}
+            {...longPressEvent}
             />
             :
-            <span>{message.text}</span>
+            <span
+              {...longPressEvent}
+            >
+              {message.text}
+            </span>
           }
           </>
         }
@@ -56,6 +90,7 @@ export default function MyMessage(props){
           onDoubleClick={()=> setisOptShown(!isOptShown)}
           shown={isOptShown?true:false}
           id={message._id}
+          messageData={props.message}
           on={<IoEllipsisVertical/>}
           off={<IoEllipsisVertical/>}
         />

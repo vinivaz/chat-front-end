@@ -1,7 +1,6 @@
 .sidebar 
 { 
   background: #ffffff;
-  border-radius: 0 7px 7px 0;
   padding: 0;
   font-family: helvetica;
   display: flex;
@@ -10,30 +9,87 @@
   height: 100vh;
   max-width: 250px;
   width:100%;
+  z-index: 5;
 }
 
-.sidebar .logout
-{
-  border:none;
-  background-color: transparent;
+.sidebar .profile
+{ position: relative;
   display: flex;
-  color:white;
-  align-items: center;
-  margin:10px;
-}
-
-.profile
-{
-  display: flex;
-  background-color: #333333;
-  border-radius: 0 7px 0 0;
+  background-color: white;
   width: 100%;
   padding: 8px;
+  box-shadow: rgb(0 0 0 / 5%) 0px 1px 4px 0px;
+  
 }
+
+.sidebar .sidebar-toggle
+{
+  display: none;
+  position: relative;
+
+}
+
+.glow
+{
+  
+}
+/*
+.profile:after
+{ 
+  
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 12px;
+  top: 96%;
+  left: 0;
+  background: linear-gradient(217deg, #14ffe9, rgba(255,0,0,0) 70.71%),
+  linear-gradient(127deg, #ffeb3b, rgba(0,255,0,0) 70.71%),
+  linear-gradient(336deg, #ff00e0, red 70.71%);
+  filter: blur(5px);
+  z-index: -100;
+  animation: animate 2s linear infinite;
+  
+}
+
+@keyframes animate {
+  
+  0%{
+    background: 
+        linear-gradient(217deg, #14ffe9, rgba(255,0,0,0) 70.71%),
+        linear-gradient(127deg, #ffeb3b, rgba(0,255,0,0) 70.71%),
+        linear-gradient(336deg, #ff00e0, red 70.71%);
+  filter: blur(5px);
+  }
+
+  50%{
+    background:
+      linear-gradient(336deg, #ff00e0, red 70.71%),
+      linear-gradient(217deg, #14ffe9, rgba(255,0,0,0) 70.71%),
+      linear-gradient(127deg, #ffeb3b, rgba(0,255,0,0) 70.71%);
+    filter: blur(7px);
+  }
+
+  100%{
+    background:
+      linear-gradient(127deg, #ffeb3b, rgba(0,255,0,0) 70.71%),
+      linear-gradient(336deg, #ff00e0, red 70.71%),
+      linear-gradient(217deg, #14ffe9, rgba(255,0,0,0) 70.71%);
+    filter: blur(3px);
+  }
+}*/
 
 .profile-image
 {
   border-radius: 3px;
+  width: 55px;
+  height: 55px;
+}
+
+.profile .improvised-profile-pic .colored-icon
+{
+  width: 55px;
+  height: 55px;
 }
 
 .profile .logout
@@ -46,16 +102,65 @@
 {
   display: flex;
   justify-content: center;
-  align-items: baseline;
+  
   flex-direction: column;
   line-height: 18px;
-  padding-left: 8px;
+  width: 100%;
+  padding-left: 5px;
 }
 
-.user-data .name
-{
-  color:white;
+.user-data .first-content
+{ 
   
+  display: flex;
+}
+
+.user-data .first-content .sidebar-buttons
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  align-items: center;
+  color: black;
+  margin-left: 20px;
+  width: 100%;
+}
+
+.user-data .first-content .sidebar-buttons .go-to-users
+{
+  display: none;
+  margin: 0 5px;
+}
+
+.user-data .first-content .sidebar-buttons .sidebar-options
+{ 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15%; 
+}
+
+.user-data .first-content .sidebar-buttons .go-to-users:hover
+{
+  background-color: #ecebeb;
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+  border-radius: 15%;
+}
+
+.user-data .first-content .sidebar-buttons .sidebar-options:hover
+{
+  background-color: #ecebeb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15%;
+}
+
+.user-data .first-content .name
+{
+  color:black; 
   font-size: 12.5px;
 }
 
@@ -85,7 +190,31 @@
     padding: 8px;
   }
 
+  .sidebar .sidebar-toggle
+  {
+    display: none;
+    position: relative;
+  }
+
+  .sidebar .sidebar-toggle .extend-icon
+  { 
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    top: -14px;
+    left: 100%;
+    background-color: black;
+    border-radius: 0 40px 40px 0;
+    color: white
+  }
+
   .profile-image
+  {
+    width: 55px;
+    height: 55px;
+  }
+
+  .profile .improvised-profile-pic .colored-icon
   {
     width: 55px;
     height: 55px;
@@ -119,3 +248,158 @@
 
   
 }
+
+@media (max-width: 760px){
+  
+  .sidebar .profile .user-data .first-content .sidebar-buttons
+  {
+    
+  }
+
+  .sidebar .profile .user-data .first-content .sidebar-buttons .go-to-users
+  {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    
+  }
+
+  .sidebar .profile .user-data .first-content .sidebar-buttons .sidebar-options
+  {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    margin-left: 5px;
+  }
+
+
+}
+
+@media (max-width: 615px){
+
+
+  .sidebar
+  {
+    
+    transition: .3s ease;
+  }
+
+  .hidden
+  {
+    width: 0;
+    position: fixed;
+    left: 0;
+    
+  }
+
+  .expanded
+  {
+    position: fixed;
+    max-width: 200px;
+    width:100%;
+    
+    left: 0;
+  }
+
+  .shruken
+  {
+    width: 65px;
+    position: fixed;
+    left: 0;
+    
+  }
+
+  .hidden .profile 
+  {
+    
+    display: none;
+    align-items:center;
+    justify-content:center;
+    background-color: #333333;
+    
+  }
+
+  .hidden .user-data 
+  {
+    display: none;
+  
+  }
+
+  .shruken .profile 
+  {
+    position: relative;
+    display: flex;
+    align-items:center;
+    justify-content:center;
+    background-color: #333333;
+    width: 100%;
+    padding: 8px;
+    
+    
+  }
+
+  .shruken .user-data 
+  {
+    display: none;
+  
+  }
+
+  .expanded .profile .user-data 
+  {
+    display: flex;
+    line-height: 14px;
+    padding-left: 5px;
+  }
+
+  .expanded .profile 
+  {
+    position: relative;
+    display: flex;
+    
+    width: 100%;
+    padding: 8px;
+    
+    
+  }
+
+  .expanded .profile .user-data .first-content .sidebar-buttons .go-to-users
+  {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+
+  .sidebar .sidebar-toggle
+  {
+    display: block;
+    position: relative;
+  }
+
+  .expanded .shruken .hidden .sidebar-toggle .extend-icon
+  { 
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    top: -48px;
+    left: 100%;
+    background-color: black;
+    border-radius: 0 40px 40px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+  }
+
+  .hidden .sidebar-toggle .extend-icon
+  {
+    top: 57px;
+    left: 0;
+    position: fixed;
+    color: white;
+  }
+
+}
+

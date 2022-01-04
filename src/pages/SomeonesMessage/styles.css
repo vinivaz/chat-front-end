@@ -14,22 +14,54 @@
   
 }
 
+.msg-box .them .msg-details .bound
+{
+  background-color: gray;
+  width: 2px;
+  padding: 5px 0;
+  position: relative;
+  left:-5px;
+}
+
+.msg-box .them .msg-details .bound::before
+{ 
+  content: '';
+  width: 2px;
+  height: 15px;
+  background-color: gray;
+  position: absolute;
+  top: -15px;  
+}
+
+.msg-box .them .msg-details .bound::after
+{
+  content: '';
+  width: 2px;
+  height: 16px;
+  background-color: gray;
+  position: absolute;
+  top: 10px;
+}
+
 .msg-box .them span
 {
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  border: 1px solid #e0e0e0;
-  border-radius: 22px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  /* border: 1px solid #e0e0e0; */
+  border-radius: 16px;
   background-color: white;
-  padding: 10px;
-  max-width: 236px;
-  box-sizing: content-box;
-  overflow-wrap: break-word;
-  
-  font-size: 13px;
-  color: #262626;
+  /* background-color:#2984ff; */
+  padding: 8px;
+  box-shadow:rgba(0, 0, 0, 0.1) 0px 2px 1px 0px;
+  font-size: 2.3rem;
+  color: black;
   line-height: 18px;
+
+  line-break:auto;
+  overflow-wrap: break-word;
   white-space: normal;
-  justify-content: center;
+  vertical-align: baseline;
+  max-width: 236px;
+  text-align: justify;
 }
 
 .msg-box .them img
@@ -53,10 +85,49 @@
   border-radius: 0 7px 7px 7px;
 }
 
+.new-messages .msg-box:first-of-type .them .options .popup-show
+{
+  top: -322%;
+  border-radius: 7px 7px 7px 0;
+}
+
+.new-messages .msg-box:last-of-type .them .options .popup-show
+{
+  top: -322%;
+  border-radius: 7px 7px 7px 0;
+}
+
 .msg-box .them .options .popup-show
 {
   font-size: 2.7rem;
   top: -340%;
   left: 150%;
   border-radius: 7px 7px 7px 0;
+}
+
+@media (max-width:358px) {
+
+  .msg-box .them .options .popup-show
+  {
+    font-size: 2.7rem;
+    top: -300%;
+    left: -35px;
+    
+    border-radius: 7px 7px 7px 0;
+  }
+
+  .msg-box .them .options
+  {
+    position:none;
+  }
+
+}
+
+@media (max-width:278px) {
+
+  .msg-box .them span
+  {
+    max-width: 190px;
+  }
+
 }

@@ -1,4 +1,8 @@
 
+.chat-room .send-message .send-msg
+{
+  position: relative;
+}
 
 .chat-room .send-message .send-msg .close-answer
 {
@@ -15,11 +19,13 @@
   box-shadow:rgba(0, 0, 0, 0.3) 0px -3px 4px -1px;
   padding: 3px 7px;
   border-radius: 10px;
+  font-size: 2.5rem;
 }
 
 .chat-room .send-message .send-msg .msg-pv
 {
-  position: relative;
+  position: absolute;
+  width: 100%;
   top: -9px;
   border: solid 1px #ddd;
   background-color: #fff;
@@ -64,7 +70,7 @@
   /*left:100px;*/
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   margin-right: 50px;
-  z-index: 5;
+  z-index: 3;
   /*box-shadow: rgba(0, 0, 0, 0.15) 0.95px -2.05px 2.6px;*/
 }
 
@@ -101,12 +107,12 @@
 .chat-room .send-message .send-msg .msg-pv .msg-pv-data .msg-pv-picture
 { 
   position: relative;
-  top: -94px;
+  top: -84px;
   border-radius: 7px;
   display: flex;
   justify-content: baseline;
-  height: 100px;
-  z-index: 5;
+  height: 85px;
+  z-index: 3;
   margin-right: 50px;
   background-color: #fff;
   box-sizing: content-box;
@@ -139,11 +145,40 @@
   top:auto;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
   background-color: #fff;
   padding: 10px;
   border-radius: 0 0 7px 7px;
   border: solid 1px #ddd;
-  z-index: 6;
+  z-index: 2;
+}
+
+.chat-room .send-message .send-msg .interaction .send-msg-btn
+{
+  position: absolute;
+  right: 23px;
+}
+
+.chat-room .send-message .send-msg .interaction .send-msg-btn svg
+{
+  font-size: 5rem;
+}
+
+.chat-room .send-message .send-msg .interaction .send-img-btn
+{
+  
+  padding: 3px;
+  border-radius: 5px;
+  margin-right: 7px;
+  box-shadow:rgba(0, 0, 0,  0.10) 0px 4px 6px -1px;
+  box-shadow:rgba(0, 0, 0, 0.4) 0px 0px 3px 1px;
+  
+}
+
+.chat-room .send-message .send-msg .interaction .send-img-btn svg
+{
+  font-size: 5rem;
+  
 }
 
 .chat-room .send-message .send-msg .interaction input
@@ -152,10 +187,12 @@
   border: solid 1px #ddd;
   height: 40px;
   border-radius: 50px;
-  padding: 0 10px;
+  padding-right: 40px;
+  padding-left: 10px;
 }
 
-.chat-room .send-message .send-msg .interaction input:focus{
+.chat-room .send-message .send-msg .interaction input:focus
+{
   outline: none;
 }
 

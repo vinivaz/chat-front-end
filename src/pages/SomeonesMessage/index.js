@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import {IoEllipsisVertical, IoEllipsisVerticalSharp } from "react-icons/io5";
 
 import MessageReference from '../MessageReference';
+import useLongPress from "../../components/useLongPress"
 import Popup from "../Popup"
 
 import "./styles.css";
@@ -11,15 +12,32 @@ export default function MyMessage(props){
   const [ message, setMessage ] = useState(props.message);
   const profileId = useSelector(state => state.profile._id);
   const dispatch = useDispatch();
+  const [ isOptShown, setisOptShown ] = useState(false);
 
 
-  function showImgMsg(url){
-    console.log("someOnesmessage, show imgmsg")
-    dispatch({type: "SET_WINDOW", data: {open: true, url: url}})
+  const onLongPress = () => {
+    setisOptShown(true)
+  };
+
+  const onClick = () => {
+    if(message.url !== undefined){
+      dispatch({type: "SET_WINDOW", data: {open: true, url: `http://${message.url}`}})
+    }
   }
+  
+  const defaultOptions = {
+    shouldPreventDefault: true,
+    delay: 400,
+  };
+
+  const longPressEvent = useLongPress(onLongPress, onClick, defaultOptions);
 
   return(
-    <div id={message.id} className="msg-box">
+    <div
+      id={message.id}
+      className="msg-box"
+      style={{display: props.deleted === true ? 'none' : 'initial' }}
+    >
       <div className="them">
         {message.deletedTo === undefined?
           <>
@@ -27,14 +45,19 @@ export default function MyMessage(props){
             {message.respondedTo !== undefined ? 
               <div className="msg-details">
                 <MessageReference messageId={message.respondedTo} />
+                <div className="bound"></div>
                 {message.url !== undefined?
                   <img 
                   src={'http://'+ message.url}
                   alt="message img"
-                  onClick={() => showImgMsg(message.url)}
+                  {...longPressEvent}
                   />
                 :
-                  <span>{message.text}</span>
+                  <span
+                    {...longPressEvent}
+                  >
+                    {message.text}
+                  </span>
                 }
                </div>
             :
@@ -43,24 +66,35 @@ export default function MyMessage(props){
                   <img 
                   src={'http://'+ message.url}
                   alt="message img"
-                  onClick={() => showImgMsg(message.url)}
+                  {...longPressEvent}
                   />
                   :
-                  <span>{message.text}</span>
+                  <span
+                    {...longPressEvent}
+                  >
+                    {message.text}
+                  </span>
                 }
               </>
             }
             
           </> :
-          <span>this message was deleted to you</span>
-        } 
-         <Popup
-          solveInWindowOptions={["delete to me"]}
-          solveInPopUpOptions={["answer"]}
-          id={message._id}
-          on={<IoEllipsisVerticalSharp/>}
+          <span>you chose not to see this message</span>
+        }
+        {message.deletedTo === undefined ?
+          <Popup
+            solveInWindowOptions={["delete to me"]}
+            solveInPopUpOptions={["answer"]}
+            shown={isOptShown?true:false}
+            id={message._id}
+            messageData={props.message}
+            on={<IoEllipsisVerticalSharp/>}
             off={<IoEllipsisVertical/>}
-        />
+          />
+          :
+          ''
+        }
+         
       </div>
     </div>
   )
