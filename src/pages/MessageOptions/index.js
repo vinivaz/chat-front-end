@@ -32,12 +32,12 @@ export default function MessageOptions({show, messageData, messageAction}){
       }  
     },
     "delete to me": {
-      text: "only the other will se this message, confirm?",
+      text: "only the other will be able to see this message, confirm?",
       finalAction : function(id){
-        console.log(id)
+        
         api.put(`/messages/deleteToOne`, {messageId: id})
         .then(response =>{
-          console.log(response.data)
+        
           dispatch({type: "HIDE_MSG_TO_ONE", data: {hidden_message: messageData._id}})
           close()
         })
@@ -73,7 +73,7 @@ export default function MessageOptions({show, messageData, messageAction}){
   }*/
 
   function close(){
-    console.log("messageOptiosn")
+  
     dispatch({type: "UNSET_WINDOW"})
     
   }

@@ -1,10 +1,7 @@
 
 import React, { useState, useEffect, useRef, memo } from 'react';
-import ReactDOM from "react-dom";
+
 import { useDispatch } from 'react-redux';
-
-
-import { api } from '../../services/api';
 
 import './styles.css';
 

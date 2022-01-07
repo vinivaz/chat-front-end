@@ -2,7 +2,9 @@ import axios from 'axios';
 import { getToken, logout } from "./auth";
 
 const api = axios.create({
-    baseURL: 'http://localhost:3000/api'
+    // baseURL: 'http://localhost:3000/api'
+    baseURL: 'https://nexum-api.herokuapp.com/api'
+    
 });
 
 api.interceptors.request.use(config => {

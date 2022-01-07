@@ -3,7 +3,7 @@ const createImage = url =>
     const image = new Image()
     image.addEventListener('load', () => resolve(image))
     image.addEventListener('error', error => reject(error))
-    image.setAttribute('crossOrigin', 'anonymous') // needed to avoid cross-origin issues on CodeSandbox
+    image.setAttribute('crossOrigin', 'anonymous') 
     image.src = url
   })
 
@@ -12,7 +12,6 @@ function getRadianAngle(degreeValue) {
 }
 
 /**
- * This function was adapted from the one in the ReadMe of https://github.com/DominicTobias/react-image-crop
  * @param {File} image - Image File url
  * @param {Object} pixelCrop - pixelCrop Object provided by react-easy-crop
  * @param {number} rotation - optional rotation parameter
@@ -54,18 +53,11 @@ export default async function getCroppedImg(imageSrc, pixelCrop, rotation = 0) {
     Math.round(0 - safeArea / 2 + image.height * 0.5 - pixelCrop.y)
   )
 
-  // As Base64 string
-  // return canvas.toDataURL('image/jpeg');
-
   // As a blob
   return new Promise(resolve => {
-
-    console.log('data url', canvas.toDataURL())
-
-   /* resolve(canvas.toDataURL("image/jpeg", 1.0))*/
+   
     canvas.toBlob(file => {
-      console.log(file, 'file')
-      resolve(file/*URL.createObjectURL(file)*/)
+      resolve(file)
     }, 'image/jpeg')
   })
 }

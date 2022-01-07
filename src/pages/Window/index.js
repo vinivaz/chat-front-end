@@ -17,7 +17,7 @@ import UserOptions from '../UserOptions';
 import ViewImage from '../ViewImage';
 
 import "./styles.css";
-import Profile from '../Profile';
+
 export default function Window(){
 
   const [ isOpen, setIsOpen ] = useState()
@@ -67,7 +67,6 @@ export default function Window(){
 */
   
   function close(){
-    console.log("window, close()")
     dispatch({type: "UNSET_WINDOW"})
   }
 

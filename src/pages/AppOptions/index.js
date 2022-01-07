@@ -28,7 +28,7 @@ export default function AppOptions(props){
   }
 
   function openPicture(url){
-    dispatch({type: 'SET_WINDOW', data: { open: true, url: `http://${url}`}})
+    dispatch({type: 'SET_WINDOW', data: { open: true, url: url}})
   }
 
   function openProfile(){

@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { api } from '../../services/api';
@@ -36,7 +36,7 @@ export default function RoomOptions(props){
   function handleOpenProfile(roomData){
     
     const otherProfile = roomData.users.filter(user => user._id !== profile._id);
-    console.log(otherProfile[0])
+
     if(otherProfile.length < 2){
       dispatch({type:'SET_PROFILE_SECTION', data: otherProfile[0]})
       close()
@@ -45,7 +45,7 @@ export default function RoomOptions(props){
 
   useEffect(() => {
     if (props.show=== true) {
-      console.log(props.roomData.users.filter(user => user !== profile._id))
+      
       setRoomId(props.roomData._id)
     } else{
       close()
@@ -94,41 +94,3 @@ export default function RoomOptions(props){
     </>
   )
 }
-
-/*
-{roomOptions&&<div className="message-window">
-          <div
-            className="window-options"
-            onClick={() => console.log(roomOptions)}
-          >
-            <span>See profile</span>
-          </div>
-          <div
-            className="window-options"
-            onClick={() => setconfirmWindow(true)}
-          >
-            <span>Delete History</span>
-          </div>
-          <div
-            className="window-options"
-            onClick={() => close()}
-          >
-            <span>Cancel</span>
-          </div>
-        </div>}
-        {confirmWindow&&<div className="message-window">
-          <span id="close" onClick={() => close()} className="close">&times;</span>
-          <span>Delete all conversations?</span>
-          <div className="buttons">
-            <button 
-              onClick={()=> {
-                deleteChatHistory(roomOptions) 
-                close()
-              }}
-            >
-              delete
-            </button>
-            <button onClick={() => close()}>cancel</button>
-          </div>
-        </div>}
-*/

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { IoEllipsisVertical , IoMenuOutline} from "react-icons/io5";
+import { useDispatch } from 'react-redux';
+import { IoEllipsisVertical} from "react-icons/io5";
 
-import MessagePreview from '../MessageReference';
+
 import Popup from "../Popup"
 import useLongPress from "../../components/useLongPress"
 
@@ -10,16 +10,11 @@ import "./styles.css";
 import MessageReference from '../MessageReference';
 
 export default function MyMessage(props){
-  const [ message, setMessage ] = useState(props.message);
+  const [ message ] = useState(props.message);
   const [ isOptShown, setisOptShown ] = useState(false);
-  const profileId = useSelector(state => state.profile._id);
+
   const dispatch = useDispatch();
 
-
-  function showImgMsg(url){
-    console.log("MyMessafe")
-    dispatch({type: "SET_WINDOW", data: {open: true, url: `http://${message.url}`}})
-  }
 
   const onLongPress = () => {
     console.log('longpress is triggered');
@@ -29,7 +24,7 @@ export default function MyMessage(props){
   const onClick = () => {
     console.log('click is triggered')
     if(message.url !== undefined){
-      dispatch({type: "SET_WINDOW", data: {open: true, url: `http://${message.url}`}})
+      dispatch({type: "SET_WINDOW", data: {open: true, url: message.url}})
     }
   }
   
@@ -57,7 +52,8 @@ export default function MyMessage(props){
             <div className="bound"></div>
             {message.url !== undefined?
               <img 
-              src={'http://'+ message.url}
+              //src={'http://'+ message.url}
+              src={message.url}
               alt="message img"
               {...longPressEvent}
               />
@@ -69,7 +65,8 @@ export default function MyMessage(props){
           <>
           {message.url !== undefined?
             <img 
-            src={'http://'+ message.url}
+            // src={'http://'+ message.url}
+            src={message.url}
             alt="message img"
             //onClick={() => showImgMsg(message.url)}
             {...longPressEvent}
@@ -86,7 +83,7 @@ export default function MyMessage(props){
         
         <Popup 
           solveInWindowOptions={["delete"]}
-          solveInPopUpOptions={["answer"]}
+          solveInPopUpOptions={["reply"]}
           onDoubleClick={()=> setisOptShown(!isOptShown)}
           shown={isOptShown?true:false}
           id={message._id}

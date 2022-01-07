@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {IoEllipsisVertical, IoEllipsisVerticalSharp } from "react-icons/io5";
 
 import MessageReference from '../MessageReference';
@@ -9,8 +9,8 @@ import Popup from "../Popup"
 import "./styles.css";
 
 export default function MyMessage(props){
-  const [ message, setMessage ] = useState(props.message);
-  const profileId = useSelector(state => state.profile._id);
+  const [ message ] = useState(props.message);
+  
   const dispatch = useDispatch();
   const [ isOptShown, setisOptShown ] = useState(false);
 
@@ -21,7 +21,7 @@ export default function MyMessage(props){
 
   const onClick = () => {
     if(message.url !== undefined){
-      dispatch({type: "SET_WINDOW", data: {open: true, url: `http://${message.url}`}})
+      dispatch({type: "SET_WINDOW", data: {open: true, url: message.url}})
     }
   }
   
@@ -48,7 +48,8 @@ export default function MyMessage(props){
                 <div className="bound"></div>
                 {message.url !== undefined?
                   <img 
-                  src={'http://'+ message.url}
+                  // src={'http://'+ message.url}
+                  src={message.url}
                   alt="message img"
                   {...longPressEvent}
                   />
@@ -64,7 +65,8 @@ export default function MyMessage(props){
               <>
                 {message.url !== undefined?
                   <img 
-                  src={'http://'+ message.url}
+                  // src={'http://'+ message.url}
+                  src={message.url}
                   alt="message img"
                   {...longPressEvent}
                   />
@@ -84,7 +86,7 @@ export default function MyMessage(props){
         {message.deletedTo === undefined ?
           <Popup
             solveInWindowOptions={["delete to me"]}
-            solveInPopUpOptions={["answer"]}
+            solveInPopUpOptions={["reply"]}
             shown={isOptShown?true:false}
             id={message._id}
             messageData={props.message}

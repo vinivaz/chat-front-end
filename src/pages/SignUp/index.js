@@ -24,14 +24,13 @@ const SignIn = () => {
   const HandleSignUp = async (e)=> {
     e.preventDefault();
     const { name, email, password } = data;
-    console.log(name, email, password);
     if (!name || !email || !password) {
       setData({...data,
         error: 'All field\'s required'
       })
     } else {
       const response = await api.post('/user/register', { name, email, password });
-      console.log(response.data)
+      
       const error = response.data.error;
       if (error) {
         setData({...data, error })

@@ -1,18 +1,12 @@
-import React, { useEffect, useState, useCallback, useRef } from 'react';
-import ReactDOM from 'react-dom'
+import React, { useEffect, useState, useCallback } from 'react';
+
 import { useSelector, useDispatch } from 'react-redux';
 
-
 import Cropper from 'react-easy-crop'
-import Slider from '@material-ui/core/Slider'
-import Button from '@material-ui/core/Button'
-import Typography from '@material-ui/core/Typography'
+
 import { withStyles } from '@material-ui/core/styles'
 import ImgDialog from './ImgDialog'
 import getCroppedImg from './cropImage'
-//import { styles } from './styles'
-import axios from 'axios';
-
 import { api } from '../../services/api'
 
 import "./styles.css";
@@ -67,7 +61,7 @@ const style = (theme) => ({
 })
 
 function EditProfile({classes}){
-  const data = useSelector(state => state.edit_profile_pic);
+
 
   const test = useSelector(state => state.edit_profile_pic);
 
@@ -109,7 +103,7 @@ function EditProfile({classes}){
         croppedAreaPixels,
         //rotation
       )
-      console.log('donee', { croppedImage })
+      
       
       //setCroppedImage(URL.createObjectURL(croppedImage))
       dispatch({type: "SET_WINDOW", data: {open: true, url: URL.createObjectURL(croppedImage)}})
@@ -122,12 +116,10 @@ function EditProfile({classes}){
 
   useEffect(() => {
   
-
     if(test.open ===true){
       setOpen(test.open)
       setImgUrl(test.url_data)
     
-      
     }else{
       setOpen(false)
       setImgUrl(null)
@@ -142,7 +134,6 @@ function EditProfile({classes}){
         croppedAreaPixels,
         //rotation
       )
-      
       
       //setCroppedImage(URL.createObjectURL(croppedImage))
       
@@ -165,7 +156,6 @@ function EditProfile({classes}){
     dispatch({type: 'SET_PROFILE', data: send.data})
 
     //setTest(newFile)
-    
   }
   
   return(<div className="edit-profile" style={{display:open? "block": "none"}}>

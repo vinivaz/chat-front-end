@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import CropOriginalSharpIcon from '@material-ui/icons/CropOriginalSharp'
+
 import { api } from '../../services/api'
 
 import { sendMsg, setUserTyping } from '../../services/socket';
 
 import MessagePreview from '../MessagePreview';
 
-import { HiOutlinePhotograph } from "react-icons/hi";
+import CropOriginalSharpIcon from '@material-ui/icons/CropOriginalSharp'
+
 import { GrSend } from "react-icons/gr";
 
 import './styles.css';
@@ -53,9 +54,7 @@ export default function SendMessage(){
         const newMsg = response.data.message
         dispatch({type: 'SET_NEW_MESSAGE', data: {active:true, message_data: newMsg}})
         dispatch({type: 'SET_ANSWER_MESSAGE', data: {active:false, message_id: undefined}})
-        console.log("new message: ",newMsg)
-        console.log("room.room_data.users: ", room.room_data.users)
-        console.log(response)
+        
         sendMsg(room.room_data, newMsg)
         //socket.emit('send-msg', newMsg, room.room_id, room.room_data)
       })
@@ -79,7 +78,7 @@ export default function SendMessage(){
             type: 'SET_NEW_MESSAGE',
             data: {active:true, message_data: newMsg}
           })
-          console.log("room.room_data: ", room.room_data)
+          
           
           //socket.emit('send-msg', newMsg, room.room_id, room.room_data)
           sendMsg(room.room_data, newMsg)
@@ -136,7 +135,7 @@ export default function SendMessage(){
             type: 'SET_NEW_MESSAGE',
             data: {active:true, message_data: newMsg}
           })
-          console.log(response)
+          
         })
         .catch(function (error){
           console.log(error)
@@ -184,18 +183,6 @@ export default function SendMessage(){
       }, 1000))
     }
   }
-
-  //       }else{
-  //         setOtherUserTyping(false)
-  //       }
-  //     }
-  //   })
-
-  //   return () => {
-      
-  //     socket.emit('leave-room', room.room_id)
-  //   }
-  // })
 
   return(
     <>

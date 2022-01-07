@@ -7,16 +7,15 @@ export default function UserOptions(props){
 
   const profile = useSelector(state => state.profile);
 
-  const [confirmWindow, setconfirmWindow] = useState(false)
+  const [confirmWindow] = useState(false)
 
   const [userId, setUserId] = useState()
 
-  const [ open, setOpen ] = useState(false)
 
   const dispatch = useDispatch()
 
   function close(){
-    console.log("userOptions, close()")
+    
     dispatch({type: "UNSET_WINDOW"})
     setUserId(undefined)
   }
@@ -41,8 +40,6 @@ export default function UserOptions(props){
             api.post('/user/rooms', { usersReceiver: [userId] } )
             .then(response => {
 
-              console.log(response)
-
               if(response.data.error){
                 alert('failed, try again')
                 close()
@@ -52,7 +49,7 @@ export default function UserOptions(props){
               }
             })
           }else{
-            console.log(secondResponse.data)
+            
             const room_id = secondResponse.data.room[0]._id;
             dispatch({type: 'SET_ROOM', data: { room_id, room_data: secondResponse.data.room[0] }})
             close()
@@ -60,7 +57,7 @@ export default function UserOptions(props){
         })
       
       }else{
-        console.log(firstResponse.data)
+        
         const room_id = firstResponse.data.room[0]._id;
         dispatch({type: 'SET_ROOM', data: { room_id, room_data: firstResponse.data.room[0] }})
         close()

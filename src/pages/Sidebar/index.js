@@ -11,13 +11,13 @@ import ArrowRightIcon from '@material-ui/icons/ArrowRight'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 
-
-
 import "./styles.css"
 
 export default function Sidebar(){
 
   const profile = useSelector(state => state.profile);
+
+  const [ profileImg, setProfileImg ] = useState()
 
   const sidebarExpanded = useSelector(state => state.navigation.expanded_sidebar);
 
@@ -29,10 +29,9 @@ export default function Sidebar(){
 
   const ref = useRef(null)
 
-  const [ dimentions, setDimentions ] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight
-  })
+  useEffect(() =>{
+    setProfileImg(profile.profile_img)
+  },[profile])
 
   useEffect(() =>{
     if(sidebarExpanded === false){
@@ -70,7 +69,7 @@ export default function Sidebar(){
   }
 
   function resetSidebarTimeout(){
-    console.log('serase vai brasil?')
+    
     if(timer !== null){
       clearTimeout(timer)
       sidebarTimeOut()
@@ -126,13 +125,15 @@ export default function Sidebar(){
       <div
         className="profile sidebar-header"
       >
-        {profile.profile_img !== "" ?
+        {profileImg !== "" ?
           <img
-          className="profile-image" 
-          src={`http://${profile.profile_img}`}
-          width="65"
-          height="65"
-          alt='teste, me deixa em paz n quero colocar detalhes'
+            className="profile-image" 
+            // src={`http://${profile.profile_img}`}
+            src={profileImg}
+            width="65"
+            height="65"
+            alt='teste, me deixa em paz n quero colocar detalhes'
+            onError={() => setProfileImg("")}
           />
         :
           <ImprovisedProfilePic circle={false} user={profile} />
@@ -187,14 +188,3 @@ export default function Sidebar(){
     </div>
   )
 }
-
-
-/*
-        <div className="glow">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-*/

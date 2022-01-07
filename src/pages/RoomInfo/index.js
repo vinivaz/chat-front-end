@@ -1,26 +1,26 @@
 import React, { useState, useEffect, useLayoutEffect, memo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {IoEllipsisVerticalSharp, IoEllipsisVertical } from "react-icons/io5";
 
-import { api } from '../../services/api'
+import { IoEllipsisVertical } from "react-icons/io5";
+
 import Popup from "../Popup"
 import ImprovisedProfilePic from "../ImprovisedProfilePic"
 import './styles.css'
 
 function RoomInfo(props){
-  const [user, setUser] = useState({})
-  const [picture, setPicture] = useState('')
-  const [lastMessage, setLastMessage] = useState('');
+  const [user, setUser] = useState({});
 
-  const currentRoom = useSelector(state => state.room.room_id)
+  const [picture, setPicture] = useState('');
+
+  const currentRoom = useSelector(state => state.room.room_id);
 
   const profile = useSelector(state => state.profile);
 
   const sidebarShowing = useSelector(state => state.navigation.show_sidebar);
 
-  const onlineUsers = useSelector(state => state.online_users)
+  const onlineUsers = useSelector(state => state.online_users);
 
-  const [ isOnline, setIsOnline ] = useState(false)
+  const [ isOnline, setIsOnline ] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -83,10 +83,12 @@ function RoomInfo(props){
         <div className="user-icon">
           {picture !== "" ?
             <img
-            src={picture&&'http://' + picture}
+            // src={picture&&'http://' + picture}
+            src={picture}
             width="50"
             height="50"
             alt="Profile"
+            onError={() => setPicture('')}
             />
           :
             <ImprovisedProfilePic user={user}  circle={true}/>
@@ -117,25 +119,3 @@ function RoomInfo(props){
 }
 
 export default memo(RoomInfo)
-
-/*
-
-api.get(`/messages/lastmessage/${props.roomId}`)
-    .then(function(response) {
-      if(response.data[0].text){
-        const lastMsg = response.data[0].text;
-        if(lastMsg.length > 30){
-          setLastMessage(lastMsg.slice(0, -(lastMsg.length - 30)) + "...")
-        } else {
-          setLastMessage(lastMsg)
-        }
-        //setLastMessage(response.data[0].text)
-      }else{
-        setLastMessage("*Picture*")
-      }
-    })
-    .catch(function (error){
-      console.log(error);
-    })
-
-    */

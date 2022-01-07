@@ -6,14 +6,13 @@ import { newRoomList, testeIniciateSocket, disconnectSocket, onRequestToDeleteRo
 
 import RoomInfo from '../RoomInfo'
 
-import Loading from '../Loading'
+
 import Loading2 from '../Loading2'
-import  io  from "socket.io-client";
+
 import './styles.css';
 
 export default function Rooms(){
   const profileId = useSelector(state => state.profile._id);
-  const onlineUsers = useSelector(state => state.online_users)
   const activeItem = useSelector(state => state.room.room_id);
   const dispatch = useDispatch();
   const [ newData, setNewData ] = useState(null)
@@ -49,7 +48,7 @@ export default function Rooms(){
 
   useEffect(() => {
     testeIniciateSocket(profileId)
-    console.log('teste inciantingf')
+    
 
     
     return () => { 
@@ -59,9 +58,9 @@ export default function Rooms(){
 
   useEffect(() => {
     newRoomList((err, data) => {
-      console.log('newRoomData', data)
-      if(err) console.log('arrrr nta dandp ccertoooo');
-      console.log(data)
+      
+      if(err) console.log("error, couldn't update message list");
+      
       setNewData(data)
       //updateRoomList(data);
     });
@@ -69,19 +68,18 @@ export default function Rooms(){
 
   useEffect(() => {
     if(newData !== null){
-      console.log(newData, "newRoomData")
+      
       updateRoomList(newData)
       setNewData(null)
     }
-    console.log("newRoomData")
+    
   },[newData])
   
 
   useEffect(() => {
     onRequestToDeleteRoom((err, data) => {
-      console.log('newRoomData', data)
-      if(err) console.log('arrrr nta dandp ccertoooo');
-      console.log(data)
+      
+      if(err) console.log('error on removing item');
       
       removeRoom(data);
     });
@@ -90,7 +88,7 @@ export default function Rooms(){
   useEffect(() => {
     getOnlineUsers((err, data) => {
       
-      if(err) console.log('arrrr nta dandp ccertoooo');
+      if(err) console.log('error on getting online users');
       
       dispatch({type: 'SET_ONLINE_USERS', data:data})
     });
@@ -133,13 +131,13 @@ export default function Rooms(){
   */
   function updateRoomList(updatedRoom){
 
-    console.log(rooms)
+    
     let delFromRooms = rooms.findIndex(x => x._id === updatedRoom._id);
     
     if(delFromRooms === -1){
-      console.log(delFromRooms)
+      
       let delFromFreshRooms = freshRooms.findIndex(x => x._id === updatedRoom._id);
-      console.log(delFromFreshRooms)
+      
       
       if(delFromFreshRooms !== -1){
         var newFreshRooms = freshRooms;
@@ -173,7 +171,7 @@ export default function Rooms(){
     api.get('/user/rooms?page=1')
     .then((response) => {
       setRooms(response.data.room.docs);
-      console.log(response.data.room.docs)
+      
       setPages(response.data.room.pages)
       
     })
@@ -194,7 +192,7 @@ export default function Rooms(){
         setIsLoading(true)
         api.get(`/user/rooms?page=${page + 1}`)
         .then((response) => {
-          console.log(response.data.room.docs)
+          
           setIsLoading(false)
           setRooms([...rooms, ...response.data.room.docs]);
           setPage(page + 1)
@@ -226,11 +224,9 @@ export default function Rooms(){
             varPage++
             api.get(`/user/rooms?page=${varPage}`)
             .then((response) => {
-              console.log('fez a requisição na seguinte pagina:', varPage)
-              console.log(response.data)
-              console.log('ta pelo menos fazendo a requisição', [...varRoom, ...response.data.room.docs])
+              
               varRoom = [...varRoom, ...response.data.room.docs];
-              console.log("varRoom",varRoom)
+          
               setRooms(varRoom)
             })
             .catch(function (error){

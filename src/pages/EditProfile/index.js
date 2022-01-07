@@ -1,7 +1,5 @@
-import React, { useEffect, useState, useCallback, useRef } from 'react';
-import ReactDOM from 'react-dom'
+import React, { useEffect, useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
 
 import Cropper from 'react-easy-crop'
 import Slider from '@material-ui/core/Slider'
@@ -10,8 +8,6 @@ import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 import ImgDialog from './ImgDialog'
 import getCroppedImg from './cropImage'
-//import { styles } from './styles'
-import axios from 'axios';
 
 import { api } from '../../services/api'
 
@@ -119,7 +115,6 @@ function EditProfile({classes}){
 
 
   useEffect(() => {
-    console.log("edit Porilfe")
 
     if(data.open ===true){
       setOpen(data.open)

@@ -15,13 +15,13 @@ export default function ProfileOptions(props){
 
   function close(){
     setconfirmWindow(false)
-    console.log("profileOptions, close")
+    
     dispatch({type: "UNSET_WINDOW"})
     setUserId(undefined)
   }
 
   const onFileChange = async (e) => {
-    console.log(e)
+    
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0]
       let imageDataUrl = await readFile(file)
@@ -61,7 +61,6 @@ export default function ProfileOptions(props){
             api.post('/user/rooms', { usersReceiver: [userId] } )
             .then(response => {
 
-              console.log(response)
 
               if(response.data.error){
                 alert('failed, try again')
@@ -72,7 +71,7 @@ export default function ProfileOptions(props){
               }
             })
           }else{
-            console.log(secondResponse.data)
+            
             const room_id = secondResponse.data.room[0]._id;
             dispatch({type: 'SET_ROOM', data: { room_id, room_data: secondResponse.data.room[0] }})
             close()
@@ -80,7 +79,7 @@ export default function ProfileOptions(props){
         })
       
       }else{
-        console.log(firstResponse.data)
+        
         const room_id = firstResponse.data.room[0]._id;
         dispatch({type: 'SET_ROOM', data: { room_id, room_data: firstResponse.data.room[0] }})
         close()
@@ -90,21 +89,21 @@ export default function ProfileOptions(props){
   }
 
   function showProfilePic(){
-    console.log("profileOptions, show profilePc")
-    dispatch({type: "SET_WINDOW", data: {open: true, url: `http://${props.profileData.profile_img}`}})
+    
+    dispatch({type: "SET_WINDOW", data: {open: true, url: props.profileData.profile_img}})
   }
 
   function deleteProfilePic(){
     api.post(`/user/profile/remove`)
     .then(response => {
-      console.log("deu bem a imagem foi apagada, ta aqui o perfil: ", response.data)
+      
       close()
     })
   }
 
   useEffect(() => {
     if (props.show=== true) {
-      console.log("props",props)
+      
       setUserId(props.profileData._id)
       
     } else{
@@ -175,7 +174,7 @@ export default function ProfileOptions(props){
         </div>
       :
         <div className="dialog-container">
-          <span className="dialog">Delete you profile picture?</span>
+          <span className="dialog">Delete your profile picture?</span>
           <div className="buttons">
             <button 
               onClick={()=> {

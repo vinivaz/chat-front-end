@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import ImprovisedProfilePic from "../ImprovisedProfilePic"
 import ProfileSettings from "../ProfileSettings"
-import { api } from '../../services/api'
 
 import "./styles.css";
 
@@ -25,7 +24,7 @@ export default function Profile(){
         setProfileData(loggedProfile)
       }else if(otherProfile._id === loggedProfile._id){
         setProfileData(loggedProfile)
-        console.log("to executand0")
+        
       } else {
 
         setProfileData(otherProfile)
@@ -35,7 +34,7 @@ export default function Profile(){
 
       // if(otherProfile._id === loggedProfile._id){
       //   setProfileData(loggedProfile)
-      //   console.log("to executand0")
+      //   
       // } else {
 
       //   setProfileData(otherProfile)
@@ -43,13 +42,6 @@ export default function Profile(){
       // }
     }
   },[currentContent, loggedProfile])
-
-  function getAnotherProfile(otherProfileId){
-    api.get(`/user/profile/find/${otherProfileId}`)
-    .then(response => {
-      setProfileData(response.data)
-    })
-  }
 
   function ProfileOptions(profile){
     dispatch({
@@ -69,7 +61,12 @@ export default function Profile(){
             <div className="profile-data">
               <div className="profile-pic" onClick={() => ProfileOptions(profileData)}>
                 {profileData.profile_img !== "" ?
-                  <img src={`http://${profileData.profile_img}`} alt={`a profile pic of ${profileData.name}`}/>
+                  // <img src={`http://${profileData.profile_img}`} alt={`a profile pic of ${profileData.name}`}/>
+                  <img
+                    src={profileData.profile_img}
+                    alt={`a profile pic of ${profileData.name}`}
+                    onError={() => setProfileData({...profileData, profile_img: ''})}
+                  />
                 :
                   <ImprovisedProfilePic user={profileData} width={100} height={100} circle={true}/>
                 }

@@ -5,8 +5,6 @@ import { logout} from '../../services/auth';
 
 import { api } from '../../services/api';
 
-import Loading from '../Loading';
-
 import Loading2 from '../Loading2';
 
 export default function DeleteAccountDialog(props){
@@ -17,8 +15,6 @@ export default function DeleteAccountDialog(props){
 
   const [ infoUp, setInfoUp ] = useState(false)
 
-  const [ info, setInfo ] = useState()
-
   const [ error, setError ] = useState()
 
   const [password, setPassword] = useState('')
@@ -28,7 +24,6 @@ export default function DeleteAccountDialog(props){
   const dispatch = useDispatch()
 
   function close(){
-    console.log("userOptions, close()")
     setPassword('')
     dispatch({type: "UNSET_WINDOW"})
     setDeleteAccount(false)
@@ -96,7 +91,6 @@ export default function DeleteAccountDialog(props){
               style={{display: infoUp === true? 'block': 'none'}}
             >
               {error&&error}
-              {info&&info}
               {isLoading=== true? <Loading2/> : ""}
             </div>
           </div>

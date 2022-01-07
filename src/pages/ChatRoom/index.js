@@ -37,17 +37,17 @@ function ChatRoom(){
 
   const dispatch = useDispatch();
 
-  const [messages, setMessages] = useState([]);
+  const [ messages, setMessages ] = useState([]);
 
-  const [newMessage, setNewMessage ] = useState([]);
+  const [ newMessage, setNewMessage ] = useState([]);
 
-  const [chatProfile, setChatProfile ] = useState({})
+  const [ chatProfile, setChatProfile ] = useState({})
 
-  const [page, setPage] = useState(1)
+  const [ page, setPage ] = useState(1)
 
-  const [pages, setPages] = useState(1)
+  const [ pages, setPages ] = useState(1)
 
-  const [isAnswering, setIsAnswering] = useState(false)
+  const [ isAnswering, setIsAnswering ] = useState(false)
 
   const [ canGetMoreMsg, setCanGetMoreMsg ] = useState(false)
 
@@ -65,11 +65,8 @@ function ChatRoom(){
 
   const ref = useRef(null);
 
-
-
   const prevRoomRef = useRef();
 
-  //
   useEffect(() => {
     prevRoomRef.current = room.room_id;
     
@@ -102,7 +99,7 @@ function ChatRoom(){
   useEffect(() => {
     onMessageDeleted((err, msgId) => {
       if(err) return;
-      console.log(msgId)
+      
       setMsgIdToDelete(msgId)
 
     });
@@ -127,7 +124,7 @@ function ChatRoom(){
       hideMsgToOneUser(hiddenMessage)
       dispatch({type: "HIDE_MSG_TO_ONE", data: {deleted_message: null}})
     }
-    console.log(messages, newMessage)
+    
   }, [hiddenMessage, messages, newMessage])
 
   useEffect(() => {
@@ -179,7 +176,7 @@ function ChatRoom(){
   }, [newMessageSent])
 
   useEffect(() => {
-    console.log(chatProfile)
+    
     if(chatProfile._id && onlineUsers){
       if(onlineUsers.includes(chatProfile._id)){
         setIsOnline(true)
@@ -200,13 +197,10 @@ function ChatRoom(){
     
     let delFromMessages = messages.findIndex(x => x._id === msgId);
 
-    console.log(messages)
-    console.log(delFromMessages)
     if(delFromMessages === -1){
       
       let delFromNewMessage = newMessage.findIndex(x => x._id === msgId);
-      console.log(newMessage)
-      console.log(delFromNewMessage)
+
       if(delFromNewMessage !== -1){
         let newMsg = newMessage;
         newMsg[delFromNewMessage].deleted = true
@@ -225,13 +219,10 @@ function ChatRoom(){
     
     let delFromMessages = messages.findIndex(x => x._id === msgId);
 
-    console.log(messages)
-    console.log(delFromMessages)
     if(delFromMessages === -1){
       
       let delFromNewMessage = newMessage.findIndex(x => x._id === msgId);
-      console.log(newMessage)
-      console.log(delFromNewMessage)
+      
       if(delFromNewMessage !== -1){
         let newMsg = newMessage;
         newMsg[delFromNewMessage].deletedTo = profileId
@@ -253,7 +244,7 @@ function ChatRoom(){
   }, [answeringMessage])
   
   function getMessages(){
-    console.log("get messages esta executando")
+    
     api.get(`/messages/${room.room_id}?page=1`)
     .then((firstResponse) => {
       setPages(firstResponse.data.pages)
@@ -279,7 +270,7 @@ function ChatRoom(){
   function getChatProfile(){
 
     const you = room.room_data.users.filter(x => x._id !== profileId)
-    console.log(you)
+    
     setChatProfile(you[0])
   }
 
@@ -329,11 +320,9 @@ function ChatRoom(){
     }
   }
 
-
   function scrollDown(){
     var chat = document.querySelector('.messages');
-    //console.log(chat)
-    //console.log(chat.scrollHeight)
+    
     chat.scrollTo(0, chat.scrollHeight)
     if(chat){
       chat.scrollTo(0, chat.scrollHeight)
@@ -384,7 +373,14 @@ function ChatRoom(){
         > 
           <div className="user-icon">
             {chatProfile.profile_img !== "" ?
-              <img src={"http://" + chatProfile.profile_img} width="50" height="50" alt="perfil"/>
+              <img
+                // src={"http://" + chatProfile.profile_img}
+                src={chatProfile.profile_img}
+                width="50"
+                height="50"
+                alt="perfil"
+                onError={() => setChatProfile({...chatProfile, profile_img: ""})}
+              />
             : 
               <ImprovisedProfilePic circle={true} user={chatProfile} width={50} height={50}/>
             }
@@ -449,133 +445,3 @@ function ChatRoom(){
 }
 
 export default memo(ChatRoom);
-
-/*
-  
-  function getMessages(){
-    api.get(`/messages/${room.room_id}?page=1`)
-    .then((firstResponse) => {
-      setPage(1)
-      setPages(firstResponse.data.pages)
-      
-      if(firstResponse.data.docs.length <= 5){
-        console.log("eu n deveria estar sendo execultado em hate")
-        if(firstResponse.data.pages > 1){
-          api.get(`/messages/${room.room_id}?page=${page + 1}`)
-          .then(secondResponse =>{
-            setMessages([...secondResponse.data.docs, ...firstResponse.data.docs])
-            setPage(...page + 1)
-          })
-          .catch(function (error){
-            console.log(error)
-          })
-        }else{
-          setMessages([...firstResponse.data.docs]);
-          return
-        }
-      }else{
-        console.log("eu tenho q ser executaldo em me e odeio")
-        setMessages([...firstResponse.data.docs]);
-      }
-    })
-    .catch(function (error){
-      console.log(error)
-    })
-  }
-  
-*/
-
-  // useEffect(() => {
-  //   console.log("adicionando nova mensagem")
-   
-  //   if(newMessageSent.active === true){
-  //     //test(newMessageSent.message_data)
-  //     //setNewMessage([...newMessage, ...[newMessageSent.message_data]])
-
-  //     //socket.emit("test", newMessageSent.message_data.text)
-  //     //dispatch({type: 'SET_NEW_MESSAGE', data: {active:false, message_data: undefined}})
-  //   }
-  
-  // }, [newMessageSent])
-
-  //this is was a try, when the message flex-direction wasn't colunm-reverse
-  // function getMessages(){
-  //   console.log("get messages esta executando")
-  //   api.get(`/messages/${room.room_id}?page=1`)
-  //   .then((firstResponse) => {
-  //     setPages(firstResponse.data.pages)
-  //     if(firstResponse.data.pages > 1){
-  //       console.log("isso aqui so pode executar em sala com mais de uma pagina")
-  //       api.get(`/messages/${room.room_id}?page=2`)
-  //       .then(secondResponse =>{
-  //         setMessages([...secondResponse.data.docs.reverse(), ...firstResponse.data.docs.reverse()])
-  //         setPage(2)
-  //         scrollDown()
-  //         setCanGetMoreMsg(true)
-  //       })
-  //       .catch(function (error){
-  //         console.log(error)
-  //       })
-  //     }else{
-  //       console.log("essa sala tem 1 pagina")
-  //       setMessages([...firstResponse.data.docs.reverse()]);
-  //       scrollDown()
-  //       setCanGetMoreMsg(true)
-  //       return
-  //     }
-  //   })
-  //   .catch(function (error){
-  //     console.log(error)
-  //   })
-  // }
-
-  
-  // const handleScroll = (e) => {
-
-  //   console.log('handleScroll esta sendo executado')
-  //   const { scrollTop, clientHeight, scrollHeight } = e.currentTarget;
-
-  //   const scrollBarPercenage = (((scrollTop/(scrollHeight - clientHeight)) * -1)*100)
-  //   console.log(scrollBarPercenage)
-  //   if(scrollBarPercenage > 97){
-  //     if(canGetMoreMsg===true){
-  //       getMoreMessages()
-  //     }
-  //   }
-  // }
-
-  // function getMoreMessages(){
-
-  //   //determinar q so busque mais mensagens quando terminar a primeira busca
-  //   //na api e dps aoutomaticamente rolar pra baixo, so pra dps habilitar o
-  //   //mais busca de mensagens
-  //   console.log("getMoreMessages esta sendo executado")
-  //   // on the second search for messages, the div messages scrollbar is acctivated
-  //   //so is necessary to stop the component to search for messages till the first
-  //   //search ends
-
-  //   setCanGetMoreMsg(false)
-  //   if(messages.length > 0){
-  //     if((page + 1) <= pages){
-  //       setTimeout(() =>{
-  //         api.get(`/messages/${room.room_id}?page=${page + 1}`)
-  //         .then((response) => {
-  //           console.log([...response.data.docs.reverse(), messages])
-  //           setMessages([])
-  //           setMessages([...response.data.docs.reverse(), ...messages])
-  //           setPage(page + 1)
-  //           setCanGetMoreMsg(true)
-  //         })
-  //         .catch(function (error){
-  //           console.log(error)
-  //           setCanGetMoreMsg(true)
-  //         })
-  //       }, 1000)
-  //     }else{
-  //       return
-  //     }
-  //   }else{
-  //     return
-  //   }
-  // }
-

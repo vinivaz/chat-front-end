@@ -1,10 +1,6 @@
-import { CollectionsOutlined } from '@material-ui/icons';
-
 import React, { useState, useEffect, useRef } from 'react';
 
 import ReactDOM from 'react-dom';
-
-import {IoEllipsisVerticalSharp, IoEllipsisVertical } from "react-icons/io5";
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -25,8 +21,6 @@ export default function Users(){
   const [ canScroll, setCanScroll ] = useState(false);
 
   const onlineUsers = useSelector(state => state.online_users);
-
-  const [ isOnline, setIsOnline ] = useState(false);
 
   const [ dimentions, setDimentions ] = useState({
     width: window.innerWidth,
@@ -241,10 +235,12 @@ export default function Users(){
               <div className="user-icon">
                 {user.profile_img !== "" ?
                   <img
-                    src={"http://" + user.profile_img}
+                    // src={"http://" + user.profile_img}
+                    src={user.profile_img}
                     width="45"
                     height="45"
-                    alt={"profile picture of " + user.name}
+                    alt={<ImprovisedProfilePic circle={true} user={user} width={45} height={45}/>}
+                    onError={() => {user.profile_img = ""}}
                   />
                 : 
                   <ImprovisedProfilePic circle={true} user={user} width={45} height={45}/>

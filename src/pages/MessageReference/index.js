@@ -1,5 +1,5 @@
 import React, { useState, useEffect, memo } from "react"
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { api } from '../../services/api'
 
@@ -8,7 +8,7 @@ import './styles.css'
 function MessageReference({messageId}){
   const [ message, setMessage ] = useState()
   const profileId = useSelector(state => state.profile._id);
-  const dispatch = useDispatch();
+  
 
   const [ thisDisplay, setThisDisplay ] = useState('initial')
 
@@ -28,10 +28,9 @@ function MessageReference({messageId}){
 
   useEffect(() => {
     if(message=== undefined|| message=== null)return;
-      console.log(message.deletedTo)
+      
       if(message.deletedTo === undefined ||message.deletedTo === null)return;
       if(message.deletedTo.includes(profileId)){
-        console.log('apagaaaa')
         setThisDisplay('none')
       }
       
@@ -53,7 +52,11 @@ function MessageReference({messageId}){
             </div>
           :
             <div className="msg-ref-picture">
-              <img src={`http://${message.url}`}  alt="message ref"/>
+              <img
+                // src={`http://${message.url}`}
+                src={message.url}
+                alt="message ref"
+              />
             </div>
           }
         </div>

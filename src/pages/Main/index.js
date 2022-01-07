@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useEffect, useState } from "react"
+import React, { useLayoutEffect } from "react"
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -34,7 +34,7 @@ export default function Main(){
   function getProfile(){
     api.get('/user/profile/find')
     .then((response) => {
-      console.log(response)
+      
       if(response.data.error=== "Invalid token"){
         dispatch({type: 'SET_INITIAL'})
         logout()

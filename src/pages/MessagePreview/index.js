@@ -1,5 +1,5 @@
 import React, { useState, useEffect, memo } from "react"
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 
 import { api } from '../../services/api'
@@ -9,13 +9,12 @@ import './styles.css'
 function MessagePreview(){
   const [ message, setMessage ] = useState()
   const answeringMessage = useSelector(state => state.answering_message);
-  const dispatch = useDispatch();
+
 
   function getMessageData(messageId){
     api.get(`/messages/singleMessage/${messageId}`)
     .then(response => {
       setMessage(response.data)
-      console.log(response.data)
     })
   }
 
@@ -43,7 +42,11 @@ function MessagePreview(){
             </div>
           :
             <div className="msg-pv-picture">
-              <img src={`http://${message.url}`}  alt="message preview"/>
+              <img
+                // src={`http://${message.url}`}
+                src={message.url}
+                alt="message preview"
+              />
             </div>
           }
         </div>

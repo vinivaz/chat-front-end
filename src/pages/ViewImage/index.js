@@ -6,7 +6,6 @@ export default function ViewImage({url}){
   const dispatch = useDispatch()
   
   function close(){
-    console.log("viewImage, close()")
     dispatch({type: "UNSET_WINDOW"})
   }
 

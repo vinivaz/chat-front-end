@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-
-import ImprovisedProfilePic from "../ImprovisedProfilePic"
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
-
-import Loading from "../Loading";
+import { useDispatch } from 'react-redux';
 
 import Loading2 from "../Loading2";
-
 
 import { api } from '../../services/api'
 
@@ -67,7 +61,7 @@ export default function ProfileSettings(){
         setIsLoading(false)
         addInfo()
       }
-      console.log(response)
+      
     })
     .catch(function(error){
       setInfoUp(false)
@@ -100,7 +94,6 @@ export default function ProfileSettings(){
   }
 
   useEffect(() => {
-    console.log(changePassword)
 
     if((changePassword.currentPassword === "")||(changePassword.newPassword === "")){
       setEnterAllowed(false)

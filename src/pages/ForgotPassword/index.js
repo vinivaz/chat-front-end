@@ -1,7 +1,7 @@
 import React, { useState, useLayoutEffect, useEffect } from "react"
 import { Link, useHistory } from 'react-router-dom';
 import { api } from '../../services/api';
-import { login, isAuthenticated } from '../../services/auth';
+import { isAuthenticated } from '../../services/auth';
 import './styles.css';
 
 import Loading from '../Loading';
@@ -80,7 +80,7 @@ const ForgotPassword = () => {
       setIsLoading(true)
       api.post('/user/forgot_password', { email })
       .then(response => {
-        console.log(response)
+        
         if(response.data.error){
           setIsLoading(false)
           setData({...data, email: ''})
@@ -118,7 +118,7 @@ const ForgotPassword = () => {
     
     api.post('/user/change_password', { email, password: newPassword, token })
       .then(response => {
-        console.log(response)
+        
         if(response.data.error){
           setIsLoading(false)
           addError(response.data.error)
