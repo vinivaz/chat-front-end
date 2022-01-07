@@ -3,7 +3,7 @@ let socket;
 
 export const testeIniciateSocket = (profileId) => {
   // socket = io('http://localhost:3000');
-  socket = io('https://nexum-api.herokuapp.com');
+  socket = io.connect('https://nexum-api.herokuapp.com', {secure: true});
  
 
   if (socket && profileId) socket.emit('online-profile', profileId);
