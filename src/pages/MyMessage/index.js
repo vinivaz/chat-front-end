@@ -8,6 +8,7 @@ import useLongPress from "../../components/useLongPress"
 
 import "./styles.css";
 import MessageReference from '../MessageReference';
+import ImgHandler from '../ImgHandler';
 
 export default function MyMessage(props){
   const [ message ] = useState(props.message);
@@ -51,12 +52,24 @@ export default function MyMessage(props){
             <MessageReference messageId={message.respondedTo} />
             <div className="bound"></div>
             {message.url !== undefined?
-              <img 
-              //src={'http://'+ message.url}
-              src={message.url}
-              alt="message img"
-              {...longPressEvent}
-              />
+            <div
+             {...longPressEvent}
+             className="msg-img-placer"
+            >
+              <ImgHandler
+                //src={'http://'+ message.url}
+                src={message.url}
+                alt="message img"
+              >
+                <h1>abublehh</h1>
+              </ImgHandler>
+            </div>
+              // <img 
+              // //src={'http://'+ message.url}
+              // src={message.url}
+              // alt="message img"
+              // {...longPressEvent}
+              // />
             :
               <span {...longPressEvent}>{message.text}</span>
             }
@@ -64,13 +77,27 @@ export default function MyMessage(props){
         :
           <>
           {message.url !== undefined?
-            <img 
-            // src={'http://'+ message.url}
-            src={message.url}
-            alt="message img"
-            //onClick={() => showImgMsg(message.url)}
-            {...longPressEvent}
-            />
+            <div
+             {...longPressEvent}
+             className="msg-img-placer"
+            >
+              <ImgHandler
+              //src={'http://'+ message.url}
+              src={message.url}
+              alt="message img"
+              
+              >
+                <h1 >abublehh</h1>
+              </ImgHandler>
+            </div>
+            
+            // <img 
+            // // src={'http://'+ message.url}
+            // src={message.url}
+            // alt="message img"
+            // //onClick={() => showImgMsg(message.url)}
+            // {...longPressEvent}
+            // />
             :
             <span
               {...longPressEvent}

@@ -72,28 +72,18 @@
 .msg-box .me .msg-details span
 { 
   /* margin-top: 4px; */
-  
-  
   padding: 8px 13px;
   font-size: 2.4rem;
-  
-  
-  
-  
-
-
-  
-  
-  
   position: relative;
+}
 
-  
+.msg-box .me .msg-img-placer
+{
 
 }
 
 .msg-box .me .msg-details img
 { 
-
   margin: 5px 0;
 }
 
@@ -145,7 +135,6 @@
     top: -300%;
     left: 229%;
     left: calc(100vw/14);
-    
     border-radius: 7px 7px 7px 0;
   }
 

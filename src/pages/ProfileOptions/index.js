@@ -96,7 +96,8 @@ export default function ProfileOptions(props){
   function deleteProfilePic(){
     api.post(`/user/profile/remove`)
     .then(response => {
-      
+      console.log(profile)
+      dispatch({type: 'SET_PROFILE', data: {...profile, profile_img: ''}})
       close()
     })
   }

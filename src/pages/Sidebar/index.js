@@ -12,6 +12,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 
 import "./styles.css"
+import ImgHandler from '../ImgHandler';
 
 export default function Sidebar(){
 
@@ -125,19 +126,16 @@ export default function Sidebar(){
       <div
         className="profile sidebar-header"
       >
-        {profileImg !== "" ?
-          <img
-            className="profile-image" 
-            // src={`http://${profile.profile_img}`}
-            src={profileImg}
-            width="65"
-            height="65"
-            alt='teste, me deixa em paz n quero colocar detalhes'
-            onError={() => setProfileImg("")}
+        <ImgHandler
+          imgClass="profile-image"
+          src={profileImg}
+          width={65}
+          height={65}
+        >
+          <ImprovisedProfilePic
+            user={profile}
           />
-        :
-          <ImprovisedProfilePic circle={false} user={profile} />
-        }
+        </ImgHandler>
         <div className="user-data sidebar-content">
           <div className="first-content">
             <div className="name">{profile.name}</div>

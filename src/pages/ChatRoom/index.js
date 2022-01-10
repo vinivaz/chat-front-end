@@ -7,6 +7,7 @@ import SendMessage from "../SendMessage"
 import ImprovisedProfilePic from "../ImprovisedProfilePic"
 import Loading2 from "../Loading2"
 import TypingAnimation from '../TypingAnimation';
+import ImgHandler from '../ImgHandler';
 
 import { api } from '../../services/api'
 
@@ -372,7 +373,21 @@ function ChatRoom(){
           className="user-data"
         > 
           <div className="user-icon">
-            {chatProfile.profile_img !== "" ?
+            <ImgHandler
+              // src={"http://" + chatProfile.profile_img}
+              src={chatProfile.profile_img}
+              width={50}
+              height={50}
+            >
+              <ImprovisedProfilePic
+                user={chatProfile}
+                width={50}
+                height={50}
+                circle={true}
+              />
+            </ImgHandler>
+            
+            {/* {chatProfile.profile_img !== "" ?
               <img
                 // src={"http://" + chatProfile.profile_img}
                 src={chatProfile.profile_img}
@@ -383,7 +398,7 @@ function ChatRoom(){
               />
             : 
               <ImprovisedProfilePic circle={true} user={chatProfile} width={50} height={50}/>
-            }
+            } */}
             {isOnline === true ?
               <div className="online-sign"></div>
               :

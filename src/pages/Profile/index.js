@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import ImprovisedProfilePic from "../ImprovisedProfilePic"
 import ProfileSettings from "../ProfileSettings"
+import ImgHandler from '../ImgHandler';
 
 import "./styles.css";
 
@@ -60,7 +61,19 @@ export default function Profile(){
           <div className="content">
             <div className="profile-data">
               <div className="profile-pic" onClick={() => ProfileOptions(profileData)}>
-                {profileData.profile_img !== "" ?
+                <ImgHandler
+                  src={profileData.profile_img}
+                  width={100}
+                  height={100}
+                >
+                  <ImprovisedProfilePic
+                    circle={true}
+                    user={profileData}
+                    width={100}
+                    height={100}
+                  />
+                </ImgHandler>
+                {/* {profileData.profile_img !== "" ?
                   // <img src={`http://${profileData.profile_img}`} alt={`a profile pic of ${profileData.name}`}/>
                   <img
                     src={profileData.profile_img}
@@ -69,7 +82,7 @@ export default function Profile(){
                   />
                 :
                   <ImprovisedProfilePic user={profileData} width={100} height={100} circle={true}/>
-                }
+                } */}
               </div>
               <div className="profile-name">
                 <span>{profileData.name}</span>

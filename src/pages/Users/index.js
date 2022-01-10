@@ -6,7 +6,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { api } from '../../services/api'
 
-import ImprovisedProfilePic from "../ImprovisedProfilePic"
+import ImprovisedProfilePic from "../ImprovisedProfilePic";
+
+import ImgHandler from '../ImgHandler';
 
 import './styles.css';
 
@@ -233,18 +235,29 @@ export default function Users(){
           <div className="users-item" key={user._id} onClick={() => openWindow(user)}>
             <div className="user-content">
               <div className="user-icon">
-                {user.profile_img !== "" ?
-                  <img
-                    // src={"http://" + user.profile_img}
+                <ImgHandler
+                  // src={"http://" + user.profile_img}
+                  src={user.profile_img}
+                  width={45}
+                  height={45}
+                >
+                  <ImprovisedProfilePic
+                    user={user}
+                    width={45}
+                    height={45}
+                    circle={true}
+                  />
+                </ImgHandler>
+                {/* {user.profile_img !== "" ?
+                  <ImgHandler
                     src={user.profile_img}
-                    width="45"
-                    height="45"
-                    alt={<ImprovisedProfilePic circle={true} user={user} width={45} height={45}/>}
-                    onError={() => {user.profile_img = ""}}
+                    width={45}
+                    height={45}
+                    userData={user}
                   />
                 : 
                   <ImprovisedProfilePic circle={true} user={user} width={45} height={45}/>
-                }
+                } */}
                 {isUserOnline(user._id) === true ?
                   <div className="online-sign"></div>
                   :

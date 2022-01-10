@@ -6,6 +6,7 @@ import { IoEllipsisVertical } from "react-icons/io5";
 import Popup from "../Popup"
 import ImprovisedProfilePic from "../ImprovisedProfilePic"
 import './styles.css'
+import ImgHandler from '../ImgHandler';
 
 function RoomInfo(props){
   const [user, setUser] = useState({});
@@ -81,7 +82,18 @@ function RoomInfo(props){
     <div className="room">
       <div className="room-features" onClick={()=>goToRoom(props.roomData)}>
         <div className="user-icon">
-          {picture !== "" ?
+          <ImgHandler
+            // src={picture&&'http://' + picture}
+            src={picture}
+            width={50}
+            height={50}
+          >
+            <ImprovisedProfilePic
+              user={user}
+              circle={true}
+            />
+          </ImgHandler>
+          {/* {picture !== "" ?
             <img
             // src={picture&&'http://' + picture}
             src={picture}
@@ -92,7 +104,7 @@ function RoomInfo(props){
             />
           :
             <ImprovisedProfilePic user={user}  circle={true}/>
-          }
+          } */}
           {isOnline === true ?
             <div className="online-sign"></div>
             :
