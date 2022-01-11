@@ -5,6 +5,9 @@ import {IoEllipsisVertical, IoEllipsisVerticalSharp } from "react-icons/io5";
 import MessageReference from '../MessageReference';
 import useLongPress from "../../components/useLongPress"
 import Popup from "../Popup"
+import ImgHandler from "../ImgHandler"
+import customImg from '../../assets/custom-img2.svg'
+
 
 import "./styles.css";
 
@@ -47,12 +50,22 @@ export default function MyMessage(props){
                 <MessageReference messageId={message.respondedTo} />
                 <div className="bound"></div>
                 {message.url !== undefined?
-                  <img 
-                  // src={'http://'+ message.url}
-                  src={message.url}
-                  alt="message img"
+                  <div
                   {...longPressEvent}
-                  />
+                  className="msg-img-placer"
+                  >
+                    <ImgHandler
+                    //src={'http://'+ message.url}
+                    src={message.url}
+                    alt="message img"
+                    
+                    >
+                      <img 
+                        src={customImg}
+                        style={{filter: 'grayscale(70%)'}}
+                      />
+                    </ImgHandler>
+                  </div>
                 :
                   <span
                     {...longPressEvent}
@@ -64,12 +77,28 @@ export default function MyMessage(props){
             :
               <>
                 {message.url !== undefined?
-                  <img 
-                  // src={'http://'+ message.url}
-                  src={message.url}
-                  alt="message img"
+                  <div
                   {...longPressEvent}
-                  />
+                  className="msg-img-placer"
+                  >
+                    <ImgHandler
+                    //src={'http://'+ message.url}
+                    src={message.url}
+                    alt="message img"
+                    
+                    >
+                      <img 
+                        src={customImg}
+                        style={{filter: 'grayscale(70%)'}}
+                      />
+                    </ImgHandler>
+                  </div>
+                  // <img 
+                  // // src={'http://'+ message.url}
+                  // src={message.url}
+                  // alt="message img"
+                  // {...longPressEvent}
+                  // />
                   :
                   <span
                     {...longPressEvent}

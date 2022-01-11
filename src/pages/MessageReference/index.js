@@ -3,6 +3,9 @@ import { useSelector } from 'react-redux';
 
 import { api } from '../../services/api'
 
+import ImgHandler from '../ImgHandler'
+import customImg from '../../assets/custom-img2.svg'
+
 import './styles.css'
 
 function MessageReference({messageId}){
@@ -52,11 +55,15 @@ function MessageReference({messageId}){
             </div>
           :
             <div className="msg-ref-picture">
-              <img
-                // src={`http://${message.url}`}
+              <ImgHandler
                 src={message.url}
-                alt="message ref"
-              />
+                // src={`http://${message.url}`}
+              >
+                <img
+                  src={customImg}
+                  style={{filter: 'grayscale(70%)'}}
+                />
+              </ImgHandler>
             </div>
           }
         </div>

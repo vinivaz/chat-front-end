@@ -10,6 +10,9 @@ import "./styles.css";
 import MessageReference from '../MessageReference';
 import ImgHandler from '../ImgHandler';
 
+
+import customImg from '../../assets/custom-img2.svg'
+
 export default function MyMessage(props){
   const [ message ] = useState(props.message);
   const [ isOptShown, setisOptShown ] = useState(false);
@@ -57,11 +60,15 @@ export default function MyMessage(props){
              className="msg-img-placer"
             >
               <ImgHandler
-                //src={'http://'+ message.url}
-                src={message.url}
-                alt="message img"
+              //src={'http://'+ message.url}
+              src={message.url}
+              alt="message img"
+              
               >
-                <h1>abublehh</h1>
+                <img 
+                  src={customImg}
+                  style={{filter: 'grayscale(70%)'}}
+                />
               </ImgHandler>
             </div>
               // <img 
@@ -87,7 +94,10 @@ export default function MyMessage(props){
               alt="message img"
               
               >
-                <h1 >abublehh</h1>
+                <img 
+                  src={customImg}
+                  style={{filter: 'grayscale(70%)'}}
+                />
               </ImgHandler>
             </div>
             

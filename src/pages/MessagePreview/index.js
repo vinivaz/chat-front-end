@@ -1,6 +1,8 @@
 import React, { useState, useEffect, memo } from "react"
 import { useSelector } from 'react-redux';
 
+import ImgHandler from "../ImgHandler"
+import customImg from '../../assets/custom-img2.svg'
 
 import { api } from '../../services/api'
 
@@ -42,11 +44,15 @@ function MessagePreview(){
             </div>
           :
             <div className="msg-pv-picture">
-              <img
-                // src={`http://${message.url}`}
-                src={message.url}
-                alt="message preview"
-              />
+              <ImgHandler
+              //src={'http://'+ message.url}
+              src={message.url}
+              >
+                <img 
+                  src={customImg}
+                  style={{filter: 'grayscale(70%)'}}
+                />
+              </ImgHandler>                   
             </div>
           }
         </div>
