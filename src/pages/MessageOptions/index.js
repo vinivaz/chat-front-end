@@ -80,7 +80,7 @@ export default function MessageOptions({show, messageData, messageAction}){
   return(
     <>
       {messageData&&<div className="dialog-container">
-        <span>{Tools[messageAction].text}</span>
+        <span className='dialog'>{Tools[messageAction].text}</span>
         <div className="buttons">
           <button 
             onClick={()=> {
