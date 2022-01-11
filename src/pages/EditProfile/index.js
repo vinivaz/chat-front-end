@@ -154,7 +154,7 @@ function EditProfile({classes}){
 
     const send = await api.post('/user/profile/edit', formData, {headers: {"Content-Type": `multipart/form-data; boundary=${formData._boundary}`}})
     
-
+    if(send.data.error) return;
     dispatch({type: 'SET_PROFILE', data: send.data})
 
     
